@@ -11,5 +11,6 @@ const {
 router.route("/auth/register").post(createUser);
 router.route("/auth/login").post(login);
 router.route("/auth/logout").get(logout);
+router.route("/auth/email-verification").post(verifyEmail);
 
 module.exports = router;

@@ -1,12 +1,16 @@
 const User = require("../model/User");
 const { attachCookiesToResponse } = require("../utils");
 const { BadRequestError } = require("../error");
+const { createTokenUser, sendVerificationEmail } = require("../utils");
+const crypto = require("crypto");
+
+// const sendEmail = require("../utils/sendEmail");
+
 const createUser = async (req, res, next) => {
   try {
     // get from the front end
 
     const { name, email, password, aboutTheUser } = req.body;
-    // console.log(name, email, password, aboutTheUser);
 
     // checking
 
@@ -15,35 +19,40 @@ const createUser = async (req, res, next) => {
     }
 
     const emailExist = await User.findOne({ email });
-    console.log(emailExist);
 
     if (emailExist) {
       throw new BadRequestError("Email already exist");
     }
 
+    // auth by email
+    const verificationToken = crypto.randomBytes(40).toString("hex");
     const user = await User.create({
       name,
       email,
       password,
       aboutTheUser,
+      verificationToken,
     });
 
     // i will first create user then email
-
-    //=== old version
-    // token User
-
-    const tokenUser = {
-      name: user.name,
-      userId: user._id,
-      // role:user.role
-      aboutTheUser: user.aboutTheUser,
-    };
-
-    // attache cookie to the response
-    attachCookiesToResponse({ res, user: tokenUser });
+    // const tokenUser = createTokenUser(user);
+    // attachCookiesToResponse({ res, user: tokenUser });
     // this is a function
-    res.status(201).json({ msg: "user created", user: user });
+
+    //  after register SendEmail
+
+    const origin = "http//localhost:3000"; // the frontend  use proxy if frontend else where
+
+    await sendVerificationEmail({
+      name: user.name,
+      email: user.email,
+      verificationToken: user.verificationToken,
+      origin,
+    });
+
+    res.status(201).json({
+      msg: "user created verified your email ",
+    });
   } catch (error) {
     console.log(error.message);
     next(error);
@@ -106,6 +115,10 @@ const login = async (req, res) => {
 
     if (!isPasswordCorrect) {
       return res.status(400).json({ msg: "Credentials invalid" });
+    }
+
+    if (!user.isVerified) {
+      return res.status(401).json({ msg: "please verify your email" });
     }
 
     // if okay
