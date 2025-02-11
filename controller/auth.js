@@ -144,7 +144,7 @@ const login = async (req, res) => {
       }
       refreshToken = existingToken.refreshToken;
       attachCookiesToResponse({ res, user: tokenUser, refreshToken });
-      res.status(StatusCodes.OK).json({ user: tokenUser });
+      res.status(200).json({ user: tokenUser });
       return;
     }
 
@@ -157,7 +157,7 @@ const login = async (req, res) => {
 
     attachCookiesToResponse({ res, user: tokenUser, refreshToken });
 
-    res.status(StatusCodes.OK).json({ user: tokenUser });
+    res.status(200).json({ user: tokenUser });
   } catch (error) {
     console.log(error, " from Login ");
   }
