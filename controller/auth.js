@@ -1,6 +1,7 @@
 const User = require("../model/User");
 const { attachCookiesToResponse } = require("../utils");
 const { BadRequestError } = require("../error");
+const Token = require("../model/Token");
 const { createTokenUser, sendVerificationEmail } = require("../utils");
 const crypto = require("crypto");
 
@@ -41,7 +42,7 @@ const createUser = async (req, res, next) => {
 
     //  after register SendEmail
 
-    const origin = "http//localhost:3000"; // the frontend  use proxy if frontend else where
+    const origin = "http//localhost:3000"; // the frontend  use proxy if frontend else where and
 
     await sendVerificationEmail({
       name: user.name,
@@ -124,10 +125,39 @@ const login = async (req, res) => {
     // if okay
     // need to change to create tokenUser
 
-    const tokenUser = { name: user.name, userId: user._id, role: user.role };
+    const tokenUser = createTokenUser(user);
+    // { name: user.name, userId: user._id, role: user.role };
     // Check if there is a redirect query parameter in the request
-    attachCookiesToResponse({ res, user: tokenUser });
-    res.status(200).json({ msg: "loggedIn", user: tokenUser });
+    // attachCookiesToResponse({ res, user: tokenUser });
+    // res.status(200).json({ msg: "loggedIn", user: tokenUser });
+    // //////////===============================
+
+    // create refresh token===============//=================
+    let refreshToken = "";
+    // check for existing token
+    const existingToken = await Token.findOne({ user: user._id });
+
+    if (existingToken) {
+      const { isValid } = existingToken;
+      if (!isValid) {
+        throw new CustomError.UnauthenticatedError("Invalid Credentials");
+      }
+      refreshToken = existingToken.refreshToken;
+      attachCookiesToResponse({ res, user: tokenUser, refreshToken });
+      res.status(StatusCodes.OK).json({ user: tokenUser });
+      return;
+    }
+
+    refreshToken = crypto.randomBytes(40).toString("hex");
+    const userAgent = req.headers["user-agent"];
+    const ip = req.ip;
+    const userToken = { refreshToken, ip, userAgent, user: user._id };
+
+    await Token.create(userToken);
+
+    attachCookiesToResponse({ res, user: tokenUser, refreshToken });
+
+    res.status(StatusCodes.OK).json({ user: tokenUser });
   } catch (error) {
     console.log(error, " from Login ");
   }

@@ -1,11 +1,10 @@
-const { isTokenValid } = require("../utils");
-const CustomError = require("../error");
-const Token = require("../model/Token");
-const { attachCookiesToResponse } = require("../utils");
-
-/////// ######### 1 authenticateUser
-// check if token is valid, or if the use was register and given a valid token
+const CustomError = require('../errors');
+const { isTokenValid } = require('../utils');
+const Token = require('../models/Token');
+const { attachCookiesToResponse } = require('../utils');
 const authenticateUser = async (req, res, next) => {
+  const { refreshToken, accessToken } = req.signedCookies;
+
   try {
     if (accessToken) {
       const payload = isTokenValid(accessToken);
@@ -20,7 +19,7 @@ const authenticateUser = async (req, res, next) => {
     });
 
     if (!existingToken || !existingToken?.isValid) {
-      throw new CustomError.UnauthenticatedError("Authentication Invalid");
+      throw new CustomError.UnauthenticatedError('Authentication Invalid');
     }
 
     attachCookiesToResponse({
@@ -32,19 +31,16 @@ const authenticateUser = async (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (error) {
-    res.status(400).json({ msg: "Authentication Invalid" });
-    // return res
-    // .status(400)
-    // .send('<script>window.location="/auth/login"</script>');
+    throw new CustomError.UnauthenticatedError('Authentication Invalid');
   }
 };
 
 const authorizePermissions = (...roles) => {
-  // rest operator copy from the call back fnct
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      // from the router
-      return res.status(403).json({ msg: "please register or login " });
+      throw new CustomError.UnauthorizedError(
+        'Unauthorized to access this route'
+      );
     }
     next();
   };
