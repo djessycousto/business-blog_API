@@ -1,0 +1,57 @@
+
+
+
+// BACKEND 
+
+1. authentification
+    => Create user // Done ✔️
+    => Login // Done ✔️
+    => Logout 
+    => send email (rest to fix origin) ~
+    => email verification (connect with link front end)~
+
+    note on the password i need to add is modified
+
+    2. user
+    => get all user // Done ✔️
+    => single user // Done ✔️
+    => delete user // Done first delete only ✔️
+    => delete completely user // 
+    => picture user // 
+
+
+
+
+      3. Article
+    => get all article // Done ✔️
+    => single article // Done ✔️
+    => delete article // Done first delete only ✔️
+    => delete completely  // 
+    => picture  // 
+
+
+    4. like
+
+    5. comment
+    6. view
+
+    7. JWT 
+    8. authenticateUser 
+  
+// FRONTEND 
+
+// WILL BE DONE WITH MODULE JS 
+// EJS
+// UPGRADE WITH REACT 
+// SASS AND CSS 
+
+
+// login / auth / first page 
+
+
+
+
+// CI CD 
+
+gitlab 
+github 
