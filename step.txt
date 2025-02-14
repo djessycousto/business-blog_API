@@ -55,3 +55,19 @@
 
 gitlab 
 github 
+
+
+
+becarefull with origin, 
+iwas having trouble with
+blog/v1/user/verification-email  =>app.use("/api-blog/v1", userRouter); 
+i made a separate router for render app.use("/api-blog/v1", pagesRouter); 
+where was  /api-blog/v1/user/verification-email 
+that why it was not working when i brought it back to user i
+it works is there a conflict ? i want to use it pages 
+
+
+solution 
+separate the 2
+/api-blog/v1/user/verification-email 
+/api-blog/v1/pages/user/verification-email  add pages 

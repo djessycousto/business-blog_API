@@ -35,10 +35,13 @@ const notFound = require("./middleware/notFound");
 const errorHandlerMiddleWare = require("./middleware/error-handler");
 
 // end point
+app.use("/api-blog/v1/pages", pagesRouter);
 app.use("/api-blog/v1", articleRouter);
 app.use("/api-blog/v1", userRouter);
 app.use("/api-blog/v1", authRouter);
-app.use("/api-blog/v1", pagesRouter);
+// app.use("/api-blog/v1", pagesRouter);
+
+// /api-blog/v1/user/
 
 //====middleWearError====//
 app.use(notFound);

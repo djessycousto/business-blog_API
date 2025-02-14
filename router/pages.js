@@ -14,8 +14,8 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-// router.get("/register", (req, res) => {
-//   res.render("register");
-// });
+router.get("/user/verify-email", (req, res) => {
+  res.render("emailpage");
+});
 
 module.exports = router;

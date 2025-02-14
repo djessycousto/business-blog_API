@@ -11,9 +11,9 @@ const createUser = async (req, res, next) => {
   try {
     // get from the front end
 
-    console.log("Headers:", req.headers);
-    console.log("Body:", req.body);
-    console.log("Raw Data:", req.rawBody); // Debugging raw request
+    // console.log("Headers:", req.headers);
+    // console.log("Body:", req.body);
+    // console.log("Raw Data:", req.rawBody); // Debugging raw request
 
     const { username, email, password, aboutTheUser } = req.body;
 
@@ -46,7 +46,9 @@ const createUser = async (req, res, next) => {
 
     //  after register SendEmail
 
-    const origin = "http//localhost:3000"; // the frontend  use proxy if frontend else where and
+    // const origin = "http://localhost:3000"; // the frontend  use proxy if frontend else where and
+    // const origin = "http://localhost:8080/api-blog/v1"; // the frontend  use proxy if frontend else where and
+    const origin = "http://localhost:8080/api-blog/v1/pages"; // the frontend  use proxy if frontend else where and
 
     await sendVerificationEmail({
       name: user.username,
@@ -74,21 +76,54 @@ const createUser = async (req, res, next) => {
 
 // add verification email
 
+// const verifyEmail = async (req, res) => {
+//   console.log(req.body, "token and email");
+
+//   const { verificationToken, email } = req.body;
+
+//   // const { verificationToken, email } = req.query;
+//   console.log(verificationToken, email, "for verification");
+
+//   const user = await User.findOne({ email });
+
+//   // checks
+
+//   if (!user) {
+//     res.status(401).json({ msg: "Unauthenticated" });
+//   }
+
+//   if (!user.verificationToken || !verificationToken) {
+//     res.status(401).json({ msg: "Unauthenticated" });
+//   }
+
+//   user.isVerified = true;
+//   user.verified = Date.now();
+//   user.verificationToken = "";
+
+//   await user.save();
+
+//   res.status(200).json({ msg: "email verified" });
+// };
+
 const verifyEmail = async (req, res) => {
-  // const { verificationToken, email } = req.body;
-  const { verificationToken, email } = req.query;
+  const { token: verificationToken, email } = req.body;
   console.log(verificationToken, email, "for verification");
 
-  const user = await User.findOne(email);
-
-  // checks
-
-  if (!user) {
-    res.status(401).json({ msg: "Unauthenticated" });
+  // 🚨 Check for missing fields before querying DB
+  if (!verificationToken || !email) {
+    return res.status(400).json({ msg: "Invalid request" });
   }
 
-  if (!user.verificationToken || !verificationToken) {
-    res.status(401).json({ msg: "Unauthenticated" });
+  const user = await User.findOne({ email });
+
+  // 🚨 Stop execution if user not found
+  if (!user) {
+    return res.status(401).json({ msg: "Unauthenticated" });
+  }
+
+  // 🚨 Ensure user has a valid token
+  if (!user.verificationToken || user.verificationToken !== verificationToken) {
+    return res.status(401).json({ msg: "Invalid or expired token" });
   }
 
   user.isVerified = true;
@@ -97,7 +132,7 @@ const verifyEmail = async (req, res) => {
 
   await user.save();
 
-  res.status(200).json({ msg: "email verified" });
+  return res.status(200).json({ msg: "Email verified" });
 };
 
 const login = async (req, res) => {

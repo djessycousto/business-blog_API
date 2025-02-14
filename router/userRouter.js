@@ -11,6 +11,14 @@ const {
 } = require("../controller/user");
 const { authenticateUser } = require("../middleware/authenticateUser");
 
+// router.get("/user/verify-email", (req, res) => {
+//   res.render("emailpage");
+// });
+
+// router.get("/user/test", (req, res) => {
+//   res.render("emailpage");
+// });
+
 router.route("/user").get(authenticateUser, getAllUser);
 router.route("/user/picture").post(authenticateUser, userPicture);
 router.route("/user/showMe").get(authenticateUser, showUser);
