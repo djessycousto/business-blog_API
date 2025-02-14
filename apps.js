@@ -4,14 +4,20 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
+const formData = require("express-form-data");
+
 require("dotenv").config();
 
 // DB
 const dbConnect = require("./db/dbConnect");
 
 //===== middleware======//
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(formData.parse()); // ✅ Enables parsing of FormData
+app.use(express.urlencoded({ extended: true })); // ✅ Allows parsing of URL-encoded data
+app.use(express.json()); // ✅ Allows parsing of JSON data
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 app.use(cookieParser(process.env.jwt_Secret)); // cookie signed how to to it

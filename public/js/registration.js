@@ -7,14 +7,19 @@ registrationBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
   //   const registrationBtn = document.querySelector("#submit");
-  const username = document.querySelector("#username").value;
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#password").value;
-  const aboutTheUser = document.querySelector("#aboutTheUser").value;
+  const username = document.querySelector("#username");
+  const email = document.querySelector("#email");
+  const password = document.querySelector("#password");
+  const aboutTheUser = document.querySelector("#aboutTheUser");
   // checks
   //   console.log(username.value, email.value, password.value, aboutTheUser.value);
 
-  if (!username || !email || !password || !aboutTheUser) {
+  if (
+    !username.value ||
+    !email.value ||
+    !password.value ||
+    !aboutTheUser.value
+  ) {
     console.log(!username, !email, !password, !aboutTheUser);
 
     throw new Error("please fill the input");
@@ -23,16 +28,16 @@ registrationBtn.addEventListener("click", async (e) => {
   // form data
 
   const registrationData = new FormData();
-  registrationData.append("username", username);
-  registrationData.append("email", email);
-  registrationData.append("password", password);
-  registrationData.append("aboutTheUser", aboutTheUser);
+  registrationData.append("username", username.value.trim());
+  registrationData.append("email", email.value.trim());
+  registrationData.append("password", password.value.trim());
+  registrationData.append("aboutTheUser", aboutTheUser.value.trim());
 
   //   loop throught
   for (const entry of registrationData.entries()) {
     console.log(entry, "entryies"); // okay
   }
-  const formDataObject = Object.fromEntries(registrationData.entries());
+  //   const formDataObject = Object.fromEntries(registrationData.entries());
 
   // Register user in my db
   try {
@@ -40,10 +45,10 @@ registrationBtn.addEventListener("click", async (e) => {
       "http://localhost:8080/api-blog/v1/auth/register",
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json", // ✅ Ensure JSON content type
-          Accept: "application/json", // ✅ Helps with CORS sometimes
-        },
+        // headers: {
+        //   "Content-Type": "application/json", // ✅ Ensure JSON content type
+        //   Accept: "application/json", // ✅ Helps with CORS sometimes
+        // },
         // body: JSON.stringify(registrationData),
         body: registrationData,
       }

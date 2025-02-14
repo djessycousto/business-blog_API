@@ -75,7 +75,10 @@ const createUser = async (req, res, next) => {
 // add verification email
 
 const verifyEmail = async (req, res) => {
-  const { verificationToken, email } = req.body;
+  // const { verificationToken, email } = req.body;
+  const { verificationToken, email } = req.query;
+  console.log(verificationToken, email, "for verification");
+
   const user = await User.findOne(email);
 
   // checks
