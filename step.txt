@@ -45,7 +45,7 @@
 // UPGRADE WITH REACT 
 // SASS AND CSS 
 
-
+// register on register send an email to verify token and email => i guess in pages get this and style it 
 // login / auth / first page 
 
 

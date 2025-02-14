@@ -3,10 +3,14 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/login", (res, req) => {
+router.get("/index", (req, res) => {
+  res.status(200).render("index");
+});
+
+router.get("/login", (req, res) => {
   res.render("login");
 });
-router.get("/register", (res, req) => {
+router.get("/register", (req, res) => {
   res.render("register");
 });
 

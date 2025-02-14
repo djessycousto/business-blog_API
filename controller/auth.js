@@ -11,11 +11,15 @@ const createUser = async (req, res, next) => {
   try {
     // get from the front end
 
-    const { name, email, password, aboutTheUser } = req.body;
+    console.log("Headers:", req.headers);
+    console.log("Body:", req.body);
+    console.log("Raw Data:", req.rawBody); // Debugging raw request
+
+    const { username, email, password, aboutTheUser } = req.body;
 
     // checking
 
-    if ((!name || !email, !password, !aboutTheUser)) {
+    if ((!username || !email, !password, !aboutTheUser)) {
       throw new BadRequestError("All fields are required!");
     }
 
@@ -28,7 +32,7 @@ const createUser = async (req, res, next) => {
     // auth by email
     const verificationToken = crypto.randomBytes(40).toString("hex");
     const user = await User.create({
-      name,
+      username,
       email,
       password,
       aboutTheUser,
@@ -45,7 +49,7 @@ const createUser = async (req, res, next) => {
     const origin = "http//localhost:3000"; // the frontend  use proxy if frontend else where and
 
     await sendVerificationEmail({
-      name: user.name,
+      name: user.username,
       email: user.email,
       verificationToken: user.verificationToken,
       origin,
