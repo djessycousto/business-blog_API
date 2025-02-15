@@ -1,6 +1,17 @@
 const User = require("../model/User");
 const { BadRequest, UnauthenticatedError } = require("../error");
 const { createTokenUser } = require("../utils/index");
+
+// multer and cloudnary
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+
+// Set up Multer (Memory Storage)
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage });
+
+// ##################### controller ###################
+
 const getAllUser = async (req, res) => {
   try {
     const user = await User.find();
@@ -58,8 +69,31 @@ const editUser = async (req, res) => {
 
 // this at last
 
-const userPicture = (req, res) => {
-  res.json("User picture");
+const userPicture = async (req, res) => {
+  try {
+    // check the file
+    console.log(req.file);
+
+    if (!req.file) {
+      console.log("no file, please upload a file");
+      return;
+    }
+
+    // Convert buffer to base64
+    const fileStr = `data:image/jpeg;base64,${req.file.buffer.toString(
+      "base64"
+    )}`;
+
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(fileStr, {
+      folder: "user-pictures",
+    });
+    res
+      .status(200)
+      .json({ url: result.secure_url, public_id: result.public_id });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updateUserPassword = async (req, res) => {

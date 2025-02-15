@@ -1,5 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+// const { upload } = require("../app"); // Import upload from app.js
+// console.log(upload, "upload");
+
+// const imported = require("../app");
+// console.log("Imported module:", imported); // Check what is being imported
+// const { upload } = imported; // Ensure upload is correctly extracted
+
+// console.log("Upload middleware:", upload);
+
+const imported = require("../app");
+console.log("Imported module:", imported); // Check what is being imported
+
+// const upload = imported.upload; // Extract it properly
+// console.log("Upload middleware:", upload);
+
+// Set up Multer (Memory Storage)
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 const {
   getAllUser,
@@ -19,8 +38,10 @@ const { authenticateUser } = require("../middleware/authenticateUser");
 //   res.render("emailpage");
 // });
 
+router.post("/user/userProfilePic", upload.single("userImage"), userPicture);
 router.route("/user").get(authenticateUser, getAllUser);
-router.route("/user/picture").post(authenticateUser, userPicture);
+// router.route("/user/picture").post(authenticateUser, userPicture);
+
 router.route("/user/showMe").get(authenticateUser, showUser);
 
 router.route("/user/:id").get(authenticateUser, getSingleUser);
