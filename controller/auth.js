@@ -4,6 +4,7 @@ const { BadRequestError } = require("../error");
 const Token = require("../model/Token");
 const { createTokenUser, sendVerificationEmail } = require("../utils");
 const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
 
 // const sendEmail = require("../utils/sendEmail");
 
@@ -136,8 +137,11 @@ const verifyEmail = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  console.log(req.body, "req.body");
+
   try {
     const { email, password } = req.body;
+    console.log(email, "email");
 
     // check
 
@@ -148,6 +152,14 @@ const login = async (req, res) => {
     }
 
     const user = await User.findOne({ email });
+    // console.log(user, "after email"); //=======> my code stop here
+
+    console.log("Entered Password:", password);
+    console.log("Stored Hashed Password:", user.password);
+    console.log(
+      "Password Match:",
+      await bcrypt.compare(password, user.password)
+    );
 
     if (!user) {
       return res.status(400).json({ msg: "Credentials invalid" });
@@ -155,6 +167,7 @@ const login = async (req, res) => {
 
     // check the password
     const isPasswordCorrect = await user.comparePassword(password);
+    console.log(isPasswordCorrect);
 
     if (!isPasswordCorrect) {
       return res.status(400).json({ msg: "Credentials invalid" });
@@ -164,10 +177,15 @@ const login = async (req, res) => {
       return res.status(401).json({ msg: "please verify your email" });
     }
 
+    console.log(user, "user in login");
+
     // if okay
     // need to change to create tokenUser
 
     const tokenUser = createTokenUser(user);
+
+    console.log(tokenUser, " tokenUser in login");
+
     // { name: user.name, userId: user._id, role: user.role };
     // Check if there is a redirect query parameter in the request
     // attachCookiesToResponse({ res, user: tokenUser });

@@ -53,8 +53,16 @@ const userSchema = mongoose.Schema({
 
 //===== hash the password and Compare password=======//
 userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  console.log("Raw Password Before Hashing:", this.password); // Log raw password
+
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+
+  console.log("Hashed Password Before Save:", this.password); // Log hashed password
+
   next();
 });
 
@@ -75,6 +83,18 @@ userSchema.methods.comparePassword = async function (userPassword) {
     console.log(error, "from the passwords verification ");
   }
 };
+
+// userSchema.methods.comparePassword = async function (userPassword) {
+//   try {
+//     if (typeof userPassword !== "string" || typeof this.password !== "string") {
+//       throw new Error("Password comparison failed due to invalid arguments");
+//     }
+//     return await bcrypt.compare(userPassword, this.password);
+//   } catch (error) {
+//     console.log(error, "from the passwords verification ");
+//     return false; // Explicitly return false if there's an error
+//   }
+// };
 
 //===== end hash the password======= //
 
