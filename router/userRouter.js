@@ -26,6 +26,7 @@ const {
   showUser,
   userPicture,
   editUser,
+  deleteImage,
   deleteUser,
 } = require("../controller/user");
 const { authenticateUser } = require("../middleware/authenticateUser");
@@ -44,6 +45,7 @@ router.route("/user").get(authenticateUser, getAllUser);
 
 router.route("/user/showMe").get(authenticateUser, showUser);
 
+router.delete("/user/delete-profile/:public_id", deleteImage);
 router.route("/user/:id").get(authenticateUser, getSingleUser);
 router.route("/user/:id").patch(authenticateUser, editUser);
 router.route("/user/:id").delete(authenticateUser, deleteUser);

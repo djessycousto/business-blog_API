@@ -96,6 +96,18 @@ const userPicture = async (req, res) => {
   }
 };
 
+const deleteImage = async (req, res) => {
+  try {
+    const { public_id } = req.params;
+
+    await cloudinary.uploader.destroy(public_id);
+
+    res.status(200).json({ message: "Image deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const updateUserPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body;
   if (!oldPassword || !newPassword) {
@@ -138,5 +150,6 @@ module.exports = {
   userPicture,
   editUser,
   deleteUser,
+  deleteImage,
   // updateUserPassword
 };
