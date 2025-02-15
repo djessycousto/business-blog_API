@@ -4,7 +4,7 @@ const { BadRequestError } = require("../error");
 const Token = require("../model/Token");
 const { createTokenUser, sendVerificationEmail } = require("../utils");
 const crypto = require("crypto");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs"); //
 
 // const sendEmail = require("../utils/sendEmail");
 
@@ -154,12 +154,12 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
     // console.log(user, "after email"); //=======> my code stop here
 
-    console.log("Entered Password:", password);
-    console.log("Stored Hashed Password:", user.password);
-    console.log(
-      "Password Match:",
-      await bcrypt.compare(password, user.password)
-    );
+    // console.log("Entered Password:", password);
+    // console.log("Stored Hashed Password:", user.password);
+    // console.log(
+    //   "Password Match:",
+    //   await bcrypt.compare(password, user.password)
+    // );
 
     if (!user) {
       return res.status(400).json({ msg: "Credentials invalid" });

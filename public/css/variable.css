@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+
+/* lora only */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+:root {
+  /* font */
+  --font-lato: "Lato", serif;
+  --font-lora: "Lora", serif;
+
+  /* max-with */
+  --max-width: 76.5rem;
+
+  /* padding and margin */
+
+  --p-s: 0.5rem;
+  --p-m: 1rem;
+  --p-l: 1.5rem;
+  --p-xl: 2rem;
+  --p-xxl: 2.5rem;
+
+  --m-s: 0.5rem;
+  --m-m: 1rem;
+  --m-l: 1.5;
+  --m-xl: 2rem;
+  --m-xxl: 2.5rem;
+
+  /* color */
+
+  --primary-color: #212121;
+  --secondary-color: #fff;
+  --complementary-color: #46485d;
+
+  --negative-BK: #000;
+
+  /* trasition  */
+
+  --transition-1: all 0.3s linear;
+}
+
+/* 
+// <weight>: Use a value from 400 to 700
+// <uniquifier>: Use a unique and descriptive class name
+
+.lora-<uniquifier> {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.lato-thin {
+    font-family: "Lato", serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+
+*/

@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* 1rem = 16px */
+  font-family: var(--font-lato);
+}
+
+body {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}

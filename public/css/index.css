@@ -1,0 +1,111 @@
+/* header and nav */
+
+.search-input,
+.place-holder-for-signin {
+  display: none;
+}
+
+.nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0 var(--p-l);
+}
+/* menu spam */
+.menu {
+  position: relative;
+  cursor: pointer;
+  /* border: 1px solid red; */
+  /* padding: 10px 0; */
+}
+
+.menu span {
+  display: block;
+  width: 1.6rem;
+  height: 0.2rem; /* Add height to make it visible */
+  position: relative;
+}
+
+.menu span::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0rem;
+  right: 0.6rem;
+  width: 100%;
+  height: 0.2rem;
+  background: chocolate;
+  transition: var(--transition-1);
+}
+
+.menu span::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  left: 0rem;
+
+  width: 100%;
+  height: 0.2rem;
+  background: chocolate;
+  transition: var(--transition-1);
+}
+
+/* Hover Effect: Switch back to original */
+.menu:hover span::before {
+  right: 0;
+}
+
+.menu:hover span::after {
+  left: -0.6rem;
+}
+
+/* logo  */
+.logo-container,
+.menu {
+  padding: 20px 0;
+}
+
+.logo-container {
+  text-transform: uppercase;
+  font-family: var(--font-lora);
+}
+
+/* side nav */
+.close-menu {
+  padding: 0.8rem;
+  color: white;
+  text-align: right;
+  /* margin-bottom: ; */
+}
+
+.close-menu span {
+  font-size: 1.5rem;
+  margin-right: auto;
+}
+
+.links-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background-color: var(--negative-BK);
+}
+.links-wrapper {
+  padding: 0 var(--p-m);
+}
+
+.links {
+  display: block;
+  color: var(--secondary-color);
+  padding: var(--p-m);
+  transition: var(--transition-1);
+}
+
+.links:hover {
+  /* width: 100%; */
+  background-color: var(--complementary-color);
+}
