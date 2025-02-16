@@ -7,6 +7,10 @@
   /* font */
   --font-lato: "Lato", serif;
   --font-lora: "Lora", serif;
+  --font-size-s: 12px;
+  --font-size: 16px;
+  --font-size-m: 18px;
+  --font-size-l: 24px;
 
   /* max-with */
   --max-width: 76.5rem;
@@ -29,6 +33,7 @@
 
   --primary-color: #212121;
   --secondary-color: #fff;
+  --third-color: chocolate;
   --complementary-color: #46485d;
 
   --negative-BK: #000;

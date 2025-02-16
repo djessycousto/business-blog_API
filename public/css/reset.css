@@ -14,12 +14,22 @@ html {
 body {
   background-color: var(--primary-color);
   color: var(--secondary-color);
+  font-family: var(--font-lora);
 }
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 li {
   list-style: none;
+}
+
+.hero-grid-1 .tag,
+.hero-gid_card-text .tag,
+.hero-grid-1 .createdAt,
+.hero-gid_card-text .createdAt {
+  font-family: var(--font-lato) !important;
+  font-weight: 400;
 }
