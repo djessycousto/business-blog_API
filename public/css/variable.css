@@ -28,6 +28,7 @@
   --m-l: 1.5;
   --m-xl: 2rem;
   --m-xxl: 2.5rem;
+  --m-extra: 52px;
 
   /* color */
 
@@ -62,3 +63,119 @@
 
 
 */
+
+/********************* editor pick */
+/* 
+.ads-subscribe {
+  display: flex;
+  flex-direction: column;
+}
+
+.ads {
+  width: 100%;
+  height: 200px;
+  background-color: rgb(161, 143, 254);
+  margin-top: var(--m-extra);
+  margin-bottom: var(--m-xl);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subscribe {
+  border: 1px solid white;
+  font-size: 20px;
+  padding: var(--p-m);
+}
+
+.subscribe h1 {
+  font-size: 20px;
+}
+
+.subscribe p {
+  font-size: 16px;
+} */
+
+/* #subscribe-form {
+  display: flex;
+  flex-direction: column;
+  margin: 18px 0 0 0;
+  max-width: 80%;
+  gap: 12px;
+}
+
+#subscribe-form input {
+  border: none;
+  background: rgb(86, 86, 86);
+  width: 100%;
+  padding: 16px 8px;
+  margin: auto;
+}
+
+#subscribe-form button {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  stroke: none;
+  appearance: none;
+  color: white;
+  margin: 16px auto;
+  background-color: rgb(151, 151, 151);
+} */
+
+/* @media only screen and (min-width: 580px) {
+  #subscribe-form button {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .ads-subscribe {
+    display: flex;
+    flex-direction: row;
+  }
+  #subscribe-form {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #subscribe-form button {
+    padding: 16px;
+    margin: 0;
+  }
+
+  .ads-subscribe {
+    flex-direction: row;
+  }
+
+  .ads {
+    width: 60%;
+  }
+
+  #subscribe-form {
+    display: flex;
+    flex-direction: column;
+    margin: 18px 0 0 0;
+    max-width: 80%;
+    gap: 12px;
+  }
+
+  #subscribe-form input {
+    border: none;
+    background: rgb(86, 86, 86);
+    width: 100%;
+    padding: 16px 8px;
+    margin: auto;
+  }
+
+  #subscribe-form button {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    stroke: none;
+    appearance: none;
+    color: white;
+    margin: 16px auto;
+    background-color: rgb(151, 151, 151);
+  }
+} */

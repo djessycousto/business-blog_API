@@ -9,12 +9,21 @@
 html {
   font-size: 16px; /* 1rem = 16px */
   font-family: var(--font-lato);
+  height: 100vh;
 }
 
 body {
   background-color: var(--primary-color);
   color: var(--secondary-color);
   font-family: var(--font-lora);
+  /* height: 100%; */
+}
+
+.underline-vertical {
+  width: 2px;
+  height: 100%;
+  border-left: 1px solid white;
+  margin: var(--m-s);
 }
 
 a {
@@ -32,4 +41,27 @@ li {
 .hero-gid_card-text .createdAt {
   font-family: var(--font-lato) !important;
   font-weight: 400;
+}
+
+.underline {
+  width: 100%;
+  height: 2px;
+  border-bottom: 1px solid white;
+  margin-top: var(--m-extra);
+  margin-bottom: 16px;
+}
+
+html {
+  font-size: 16px; /* 1rem = 16px */
+  font-family: var(--font-lato);
+  height: 100vh;
+}
+.underline-vertical {
+  width: 2px;
+  height: 100%;
+  /* background-color: white; */
+  align-self: stretch;
+  /* border-left: 1px solid white; */
+  /* margin: var(--m-s); */
+  margin: 0 24px;
 }
