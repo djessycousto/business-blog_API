@@ -1,4 +1,4 @@
-name: News Blog
+name: Lint Codebase
 
 on:
   push:
