@@ -1,10 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
-require("dotenv").config();
-app.use(cookieParser(process.env.JWT_SECRET)); // ✅ Signed cookies
+app.use(cookieParser(process.env.jwt_Secret)); // ✅ Signed cookies
 const cors = require("cors");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
@@ -32,12 +32,12 @@ app.use(
   })
 );
 
-// app.use(cookieParser(process.env.JWT_SECRET)); // ✅ Signed cookies
+// app.use(cookieParser(process.env.jwt_Secret)); // ✅ Signed cookies
 app.use(express.urlencoded({ extended: true })); // ✅ Allows URL-encoded data
 app.use(express.json()); // ✅ Allows JSON data
 // app.use(cors());
 
-console.log(process.env.JWT_SECRET, "JWT_SECRET");
+console.log(process.env.jwt_Secret, "jwt_Secret");
 
 // to fixe the empty cookie issue
 
@@ -65,7 +65,7 @@ app.use(notFound);
 app.use(errorHandlerMiddleWare);
 
 // ==== Port and DB Connection ====//
-const port = process.env.PORT || 8080;
+const port = process.env.Port || 8080;
 const start = async () => {
   try {
     if (dbConnect) {

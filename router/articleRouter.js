@@ -13,7 +13,7 @@ const { authenticateUser } = require("../middleware/authenticateUser");
 
 router
   .route("/article")
-  .get(getAllArticle)
+  .get(authenticateUser, getAllArticle)
   .post(authenticateUser, createArticle);
 router.route("/article/picture").post(articlePicture);
 router.route("/article/:articleId").get(getSingleArticle);

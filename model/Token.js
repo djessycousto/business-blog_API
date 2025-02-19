@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const TokenSchema = new mongoose.Schema(
   {
@@ -7,12 +7,13 @@ const TokenSchema = new mongoose.Schema(
     userAgent: { type: String, required: true },
     isValid: { type: Boolean, default: true },
     user: {
+      // type: mongoose.Schema.Types.ObjectId,
       type: mongoose.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Token', TokenSchema);
+module.exports = mongoose.model("Token", TokenSchema);

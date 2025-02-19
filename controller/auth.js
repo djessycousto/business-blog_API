@@ -1,6 +1,6 @@
 const User = require("../model/User");
 const { attachCookiesToResponse } = require("../utils");
-const { BadRequestError } = require("../error");
+const { BadRequestError, UnauthenticatedError } = require("../error");
 const Token = require("../model/Token");
 const { createTokenUser, sendVerificationEmail } = require("../utils");
 const crypto = require("crypto");
@@ -10,16 +10,9 @@ const crypto = require("crypto");
 
 const createUser = async (req, res, next) => {
   try {
-    // get from the front end
-
-    // console.log("Headers:", req.headers);
-    // console.log("Body:", req.body);
-    // console.log("Raw Data:", req.rawBody); // Debugging raw request
-
     const { username, email, password, aboutTheUser } = req.body;
 
     // checking
-
     if ((!username || !email, !password, !aboutTheUser)) {
       throw new BadRequestError("All fields are required!");
     }
@@ -40,7 +33,7 @@ const createUser = async (req, res, next) => {
       verificationToken,
     });
 
-    // i will first create user then email
+    // first create user then email
     // const tokenUser = createTokenUser(user);
     // attachCookiesToResponse({ res, user: tokenUser });
     // this is a function
@@ -51,6 +44,7 @@ const createUser = async (req, res, next) => {
     // const origin = "http://localhost:8080/api-blog/v1"; // the frontend  use proxy if frontend else where and
     const origin = "http://localhost:8080/api-blog/v1/pages"; // the frontend  use proxy if frontend else where and
 
+    // send an email
     await sendVerificationEmail({
       name: user.username,
       email: user.email,
@@ -64,76 +58,43 @@ const createUser = async (req, res, next) => {
   } catch (error) {
     console.log(error.message);
     next(error);
-    // return next(
-    //   new BadRequestError(
-    //     Object.values(error.errors)
-    //       .map((e) => e.message)
-    //       .join(", ")
-    // )
-    // );
-    // console.log(error);
   }
 };
 
-// add verification email
+const verifyEmail = async (req, res, next) => {
+  try {
+    const { token: verificationToken, email } = req.body;
 
-// const verifyEmail = async (req, res) => {
-//   console.log(req.body, "token and email");
+    // Check for missing fields before querying DB
+    if (!verificationToken || !email) {
+      throw new BadRequestError("Invalid request");
+    }
 
-//   const { verificationToken, email } = req.body;
+    const user = await User.findOne({ email });
 
-//   // const { verificationToken, email } = req.query;
-//   console.log(verificationToken, email, "for verification");
+    //  Stop execution if user not found
+    if (!user) {
+      throw new UnauthenticatedError("Unauthenticated");
+    }
 
-//   const user = await User.findOne({ email });
+    //  Ensure user has a valid token
+    if (
+      !user.verificationToken ||
+      user.verificationToken !== verificationToken
+    ) {
+      throw new UnauthenticatedError("Invalid or expired token");
+    }
 
-//   // checks
+    user.isVerified = true;
+    user.verified = Date.now();
+    user.verificationToken = "";
 
-//   if (!user) {
-//     res.status(401).json({ msg: "Unauthenticated" });
-//   }
+    await user.save();
 
-//   if (!user.verificationToken || !verificationToken) {
-//     res.status(401).json({ msg: "Unauthenticated" });
-//   }
-
-//   user.isVerified = true;
-//   user.verified = Date.now();
-//   user.verificationToken = "";
-
-//   await user.save();
-
-//   res.status(200).json({ msg: "email verified" });
-// };
-
-const verifyEmail = async (req, res) => {
-  const { token: verificationToken, email } = req.body;
-  console.log(verificationToken, email, "for verification");
-
-  // 🚨 Check for missing fields before querying DB
-  if (!verificationToken || !email) {
-    return res.status(400).json({ msg: "Invalid request" });
+    return res.status(200).json({ msg: "Email verified" });
+  } catch (error) {
+    next(error);
   }
-
-  const user = await User.findOne({ email });
-
-  // 🚨 Stop execution if user not found
-  if (!user) {
-    return res.status(401).json({ msg: "Unauthenticated" });
-  }
-
-  // 🚨 Ensure user has a valid token
-  if (!user.verificationToken || user.verificationToken !== verificationToken) {
-    return res.status(401).json({ msg: "Invalid or expired token" });
-  }
-
-  user.isVerified = true;
-  user.verified = Date.now();
-  user.verificationToken = "";
-
-  await user.save();
-
-  return res.status(200).json({ msg: "Email verified" });
 };
 
 const login = async (req, res) => {
@@ -177,7 +138,7 @@ const login = async (req, res) => {
       return res.status(401).json({ msg: "please verify your email" });
     }
 
-    console.log(user, "user in login");
+    // console.log(user, "user in login");
 
     // if okay
     // need to change to create tokenUser

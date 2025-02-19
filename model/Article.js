@@ -13,7 +13,8 @@ const articleSchema = mongoose.Schema(
       min: [4, "Please the title must have minimum 4 letter"],
     },
     createBy: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
+      // type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -33,6 +34,7 @@ const articleSchema = mongoose.Schema(
         "Stock",
         "Technology",
       ],
+      default: "Guests Posts",
     },
   },
   { timestamps: true }

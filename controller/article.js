@@ -1,12 +1,14 @@
+const { error } = require("console");
 const Article = require("../model/Article");
-
 const path = require("path");
-const { errorHandlerMiddleware } = require("../middleware/error-handler");
-const { CustomAPIError } = require("../error/index");
+// const { errorHandlerMiddleware } = require("../middleware/error-handler");
+// const CustomAPIError = require("../error/index");
 
 const createArticle = async (req, res, next) => {
   try {
+    // console.log(req.user.userId, "user in article");
     req.body.createBy = req.user.userId; // Assign user ID from request
+    // req.user.userId = req.body.createBy; // Assign user ID from request
 
     if (!req.body.title || !req.body.article) {
       throw new CustomAPIError("Title and article content are required", 400);

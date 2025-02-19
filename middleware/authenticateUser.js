@@ -6,10 +6,12 @@ const { attachCookiesToResponse } = require("../utils");
 /////// ######### 1 authenticateUser
 // check if token is valid, or if the use was register and given a valid token
 const authenticateUser = async (req, res, next) => {
+  const { refreshToken, accessToken } = req.signedCookies || {};
+
   try {
     if (accessToken) {
       const payload = isTokenValid(accessToken);
-      req.user = payload.user;
+      req.user = payload;
       return next();
     }
     const payload = isTokenValid(refreshToken);
@@ -18,6 +20,8 @@ const authenticateUser = async (req, res, next) => {
       user: payload.user.userId,
       refreshToken: payload.refreshToken,
     });
+
+    console.log(existingToken, "existing token");
 
     if (!existingToken || !existingToken?.isValid) {
       throw new CustomError.UnauthenticatedError("Authentication Invalid");
@@ -32,7 +36,7 @@ const authenticateUser = async (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (error) {
-    res.status(400).json({ msg: "Authentication Invalid" });
+    res.status(401).json({ msg: "Authentication Invalid" });
     // return res
     // .status(400)
     // .send('<script>window.location="/auth/login"</script>');
