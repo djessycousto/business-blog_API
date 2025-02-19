@@ -1,7 +1,4 @@
-const name = document.querySelector("#name");
 const registrationBtn = document.querySelector("#submit");
-
-const form = [...document.querySelector("form")];
 
 registrationBtn.addEventListener("click", async (e) => {
   e.preventDefault();
