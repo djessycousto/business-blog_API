@@ -4,6 +4,7 @@
 // BACKEND 
 
 1. authentification
+  => Model  Done ✔️
     => Create user // Done ✔️
     => Login // Done ✔️
     => Logout 
@@ -23,6 +24,9 @@
 
 
       3. Article
+    => Model  Done ✔️
+  
+  // controller
     => get all article // Done ✔️
     => single article // Done ✔️
     => delete article // Done first delete only ✔️

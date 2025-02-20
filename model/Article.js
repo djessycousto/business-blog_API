@@ -42,6 +42,27 @@ const articleSchema = mongoose.Schema(
       ],
       required: [true, "Please choose at least one category"],
     },
+
+    tags: {
+      type: [String], // Array of tags
+      enum: [
+        "Automobile",
+        "Editors pick",
+        "Guests Posts",
+        "Health",
+        "Must",
+        "Politics",
+        "Stock",
+        "Technology",
+        // Add more specific tags if needed
+        "Innovation",
+        "AI",
+        "Business",
+        "Lifestyle",
+      ],
+      default: [], // Optional: Empty array if no tags are selected
+    },
+
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -1,67 +1,122 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const userSchema = mongoose.Schema({
-  username: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide a username"],
-    // min: [4, "Please the username must have minimum 4 letter"],
-  },
-  aboutTheUser: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide a title"],
-    // min: [150, "Please the About must have minimum 4 letter"],
-  },
+// const userSchema = mongoose.Schema({
+//   username: {
+//     type: String,
+//     trim: true,
+//     required: [true, "Please provide a username"],
+//     min: [4, "Please the username must have minimum 4 letter"],
+//   },
+//   aboutTheUser: {
+//     type: String,
+//     trim: true,
+//     required: [true, "Please provide about"],
+//     min: [150, "Please tell us more about you at least 150 character"],
+//   },
 
-  email: {
-    type: String,
-    trim: true,
-    unique: true,
-    // make it unique
-  },
-  password: {
-    type: String,
-    trim: true,
-    required: [true, "please the password is required"],
-    // add min
-  },
+//   email: {
+//     type: String,
+//     trim: true,
+//     unique: true,
+//     required: [true, "Please provide an email"],
+//   },
+//   password: {
+//     type: String,
+//     trim: true,
+//     required: [true, "please the password is required"],
+//     // add min
+//   },
 
-  userImage: {
-    type: String,
-    default: "/uploads/placeholder.jpg", // no default
-  },
-  verificationToken: {
-    type: String,
-    // required:true
-  },
-  isVerified: {
-    type: Boolean,
-    default: false,
-  },
+//   userImage: {
+//     type: String,
+//     default: "/uploads/placeholder.jpg", // no default
+//   },
+//   verificationToken: {
+//     type: String,
+//     // required:true
+//   },
+//   isVerified: {
+//     type: Boolean,
+//     default: false,
+//   },
 
-  role: {
-    type: String,
-    enum: ["admin", "user", "owner"],
-    default: "user",
-  },
-  verified: {
-    type: Date,
-    default: Date.now,
-  },
-});
+//   role: {
+//     type: String,
+//     enum: ["admin", "user", "owner"],
+//     default: "user",
+//   },
+//   verified: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// });
 
 //===== hash the password and Compare password=======//
+
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide a username"],
+      minlength: [4, "Username must have at least 4 characters"],
+      maxlength: [25, "Username cannot exceed 30 characters"],
+    },
+    aboutTheUser: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide some information about yourself"],
+      minlength: [150, "Tell us more about you (at least 150 characters)"],
+      maxlength: [500, "About section cannot exceed 500 characters"],
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique: true,
+      required: [true, "Please provide an email"],
+      match: [
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        "Please provide a valid email",
+      ],
+    },
+    password: {
+      type: String,
+      trim: true,
+      required: [true, "Password is required"],
+      minlength: [8, "Password must be at least 8 characters"],
+      select: false, // Exclude password from query results by default
+    },
+    userImage: {
+      type: String,
+      default: "/uploads/placeholder.jpg", // Can use a default placeholder
+    },
+    verificationToken: {
+      type: String,
+      default: null, // Optional: Explicitly mark as optional
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    role: {
+      type: String,
+      enum: ["admin", "user", "moderator"],
+      default: "user",
+    },
+    verified: {
+      type: Date,
+      default: null, // Only set once verified
+    },
+  },
+  { timestamps: true }
+);
+
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
-  console.log("Raw Password Before Hashing:", this.password); // Log raw password
-
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-
-  console.log("Hashed Password Before Save:", this.password); // Log hashed password
 
   next();
 });
@@ -80,7 +135,8 @@ userSchema.methods.comparePassword = async function (userPassword) {
     }
     return await bcrypt.compare(userPassword, this.password);
   } catch (error) {
-    console.log(error, "from the passwords verification ");
+    console.log(error, "From the passwords verification ");
+    throw new Error("From the passwords verification");
   }
 };
 
