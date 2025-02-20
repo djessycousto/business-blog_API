@@ -6,6 +6,9 @@ const router = express.Router();
 router.get("/home", (req, res) => {
   res.status(200).render("index");
 });
+router.get("/category/test", (req, res) => {
+  res.status(200).render("articles");
+});
 
 router.get("/login", (req, res) => {
   res.render("login");

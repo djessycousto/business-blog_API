@@ -42,6 +42,15 @@
   /* trasition  */
 
   --transition-1: all 0.3s linear;
+
+  /* grid */
+
+  --grid-min: 277px;
+  --grid-setup-1-desktop: repeat(auto-fit, minmax(200px, 1fr));
+  --grid-setup-1-mobile: repeat(
+    auto-fill,
+    minmax(min(var(var(--grid-min)), 100%), 1fr)
+  );
 }
 
 /* 

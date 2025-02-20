@@ -1,0 +1,50 @@
+.article-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+/********************* left-section-article */
+
+.left-section-article {
+  border: 1px solid red;
+  flex: 1 1 100%;
+}
+
+.left-section-article h1 {
+  font-size: 28px;
+  padding: 24px 0 0 0;
+}
+
+.grid_card_content {
+  padding: 24px 0;
+}
+
+.section-grid-card-content button {
+  border: none;
+  stroke: none;
+  background: transparent;
+  padding: 12px 0;
+  color: white;
+  font-size: 18px;
+}
+
+.section-grid-card-content .grid_card-text h2 {
+  font-size: 26px;
+  padding-top: 18px;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-flex {
+    flex-direction: row;
+  }
+  .left-section-article h1 {
+    font-size: 32px;
+  }
+
+  /********************* left-section-article */
+}
+
+.right-section-article {
+  border: 1px solid red;
+  flex: 1 1 40%;
+}

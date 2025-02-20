@@ -537,7 +537,8 @@ main {
 
 .grid_card_content-wrap {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: var(--grid-setup-1-mobile);
+  /* grid-template-rows: 1fr 1fr 1fr; */
   justify-content: start;
   align-content: start;
   gap: 16px;
@@ -581,7 +582,8 @@ main {
   }
 
   .grid_card_content-wrap {
-    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    grid-template-columns: var(--grid-setup-1-desktop);
     grid-template-rows: auto;
   }
 }
