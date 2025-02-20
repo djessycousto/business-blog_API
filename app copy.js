@@ -70,14 +70,14 @@ const start = async () => {
   try {
     if (dbConnect) {
       await dbConnect(process.env.URI_MONGO);
-      console.log("db connect");
+      // console.log("db connect");
     }
     //========= Server Start ======//
     app.listen(port, () => {
       console.log("port connected " + port);
     });
   } catch (error) {
-    console.log("Connection error");
+    throw new Error("Local connection error", { cause: error });
   }
 };
 start();

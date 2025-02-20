@@ -1,5 +1,5 @@
 const Article = require("../model/Article");
-const path = require("path");
+// const path = require("path");
 const { BadRequestError } = require("../error");
 
 const createArticle = async (req, res, next) => {
@@ -24,7 +24,7 @@ const getAllArticle = async (req, res, next) => {
   }
 };
 
-const getSingleArticle = async (req, res) => {
+const getSingleArticle = async (req, res, next) => {
   // i need to add auth in here
   try {
     const { articleId } = req.params;

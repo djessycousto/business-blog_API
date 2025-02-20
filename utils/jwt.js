@@ -18,7 +18,10 @@ const isTokenValid = (token) => {
 
     return decoded.payload.user;
   } catch (error) {
-    throw new CustomError.UnauthenticatedError("Authentication Invalid");
+    throw new CustomError.UnauthenticatedError(
+      "Authentication Invalid",
+      error.message
+    );
   }
 };
 

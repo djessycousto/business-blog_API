@@ -71,7 +71,7 @@ const start = async () => {
       console.log("port connected " + port);
     });
   } catch (error) {
-    console.log("Connection error");
+    throw new Error("Local connection error ", { cause: error });
   }
 };
 start();

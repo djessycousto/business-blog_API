@@ -2,7 +2,7 @@
 
 const menu = document.querySelector(".menu");
 const closeMenu = document.querySelector(".close-menu");
-const linksContainer = document.querySelector(".links-container");
+// const linksContainer = document.querySelector(".links-container");
 const overlay = document.querySelector(".overlay");
 
 menu.addEventListener("click", () => {

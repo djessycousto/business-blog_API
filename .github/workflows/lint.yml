@@ -3,13 +3,13 @@ name: Lint Codebase
 on:
   push:
     branches:
-      # - master
+      - master
       - nowhere
-      - develop
+      - developer
   pull_request:
     branches:
       - master
-      - develop
+      - developer
 
 jobs:
   lint:

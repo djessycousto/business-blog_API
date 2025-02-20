@@ -10,7 +10,8 @@ const multer = require("multer");
 
 // console.log("Upload middleware:", upload);
 
-const imported = require("../app");
+// attention on this for the img
+// const imported = require("../app");
 
 // const upload = imported.upload; // Extract it properly
 

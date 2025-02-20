@@ -1,9 +1,6 @@
 const User = require("../model/User");
-const { UnauthenticatedError, BadRequestError } = require("../error");
-const { createTokenUser } = require("../utils/index");
-
-// // multer and cloudnary
-const multer = require("multer");
+const { BadRequestError } = require("../error");
+const { createTokenUser, attachCookiesToResponse } = require("../utils");
 const cloudinary = require("cloudinary").v2;
 
 // // Set up Multer (Memory Storage)
@@ -100,7 +97,7 @@ const userPicture = async (req, res, next) => {
   }
 };
 
-const deleteImage = async (req, res) => {
+const deleteImage = async (req, res, next) => {
   try {
     const { public_id } = req.params;
 
@@ -109,32 +106,33 @@ const deleteImage = async (req, res) => {
     res.status(200).json({ message: "Image deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 
 // will use email not this
-const updateUserPassword = async (req, res, next) => {
-  const { oldPassword, newPassword } = req.body;
-  if (!oldPassword || !newPassword) {
-    throw new BadRequestError("please provide old pass and new pass");
-  }
-  const user = await User.findOne({ _id: req.user.userId });
-  // need to check user
+// const updateUserPassword = async (req, res, next) => {
+//   const { oldPassword, newPassword } = req.body;
+//   if (!oldPassword || !newPassword) {
+//     throw new BadRequestError("please provide old pass and new pass");
+//   }
+//   const user = await User.findOne({ _id: req.user.userId });
+//   // need to check user
 
-  // Compare the password // // the old password
+//   // Compare the password // // the old password
 
-  const isPasswordCorrect = user.comparePassword(oldPassword);
+//   const isPasswordCorrect = user.comparePassword(oldPassword);
 
-  if (!isPasswordCorrect) {
-    res.status(400).json({ message: "please provide  VALID PASS" });
-  }
+//   if (!isPasswordCorrect) {
+//     res.status(400).json({ message: "please provide  VALID PASS" });
+//   }
 
-  //  SAVE NEW PASS
+//   //  SAVE NEW PASS
 
-  user.password = newPassword;
-  await user.save();
-  res.status(200).json({ msg: "success password updated" });
-};
+//   user.password = newPassword;
+//   await user.save();
+//   res.status(200).json({ msg: "success password updated" });
+// };
 
 const deleteUser = async (req, res) => {
   try {

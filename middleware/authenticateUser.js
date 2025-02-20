@@ -35,10 +35,7 @@ const authenticateUser = async (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (error) {
-    res.status(401).json({ msg: "Authentication Invalid" });
-    // return res
-    // .status(400)
-    // .send('<script>window.location="/auth/login"</script>');
+    res.status(401).json({ msg: "Authentication Invalid" + error.message });
   }
 };
 
