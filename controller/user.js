@@ -1,54 +1,59 @@
 const User = require("../model/User");
-const { BadRequest, UnauthenticatedError } = require("../error");
+const { UnauthenticatedError, BadRequestError } = require("../error");
 const { createTokenUser } = require("../utils/index");
 
-// multer and cloudnary
+// // multer and cloudnary
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 
-// Set up Multer (Memory Storage)
+// // Set up Multer (Memory Storage)
 // const storage = multer.memoryStorage();
 // const upload = multer({ storage });
 
 // ##################### controller ###################
 
-const getAllUser = async (req, res) => {
+const getAllUser = async (req, res, next) => {
   try {
-    const user = await User.find();
+    const user = await User.find().select("-password");
+    res.status(200).json({ user });
   } catch (error) {
-    console.log(error.message, "from all user");
+    next(error);
   }
-
-  res.status(200).json({ msg: "test 1" });
 };
 
-const getSingleUser = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findOne({ _id: id }).select("-password");
+const getSingleUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id }).select("-password");
 
-  if (!user) {
-    throw new BadRequest("No id matches your request");
+    if (!user) {
+      throw new BadRequestError("No id matches your request");
+    }
+    res.status(200).json({ user });
+  } catch (error) {
+    next(error);
   }
-  res.status(200).json({ user });
 };
 
-// ============ //
-const showUser = (req, res) => {
-  console.log(req.user);
-  res.status(200).json({ user: req.user });
+const showUser = (req, res, next) => {
+  try {
+    res.status(200).json({ user: req.user });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const editUser = async (req, res) => {
+const editUser = async (req, res, next) => {
   // i can use image edit in her
   // coming from  the authentication
 
   try {
-    const { name, email, userPicture } = req.body;
+    const { name, email } = req.body;
     // check
     if (!name || !email) {
-      throw new BadRequest("email or name missing");
+      throw new BadRequestError("Name or Email missing");
     }
-    // update
+    // update user input
     const userUpdated = await User.findOneAndUpdate(
       { _id: req.user.userId },
       { email, name },
@@ -63,20 +68,19 @@ const editUser = async (req, res) => {
     // attacheCookies
     attachCookiesToResponse({ res, userUpdated: tokenUser }); //to be changed with email
   } catch (error) {
-    throw new Error(error.message);
+    next(error);
+    // throw new Error(error.message);
   }
 };
 
 // this at last
 
-const userPicture = async (req, res) => {
+const userPicture = async (req, res, next) => {
+  // using muller and cloudinary
   try {
     // check the file
-    console.log(req.file);
-
     if (!req.file) {
-      console.log("no file, please upload a file");
-      return;
+      throw new BadRequestError("no file, please upload a file");
     }
 
     // Convert buffer to base64
@@ -92,7 +96,7 @@ const userPicture = async (req, res) => {
       .status(200)
       .json({ url: result.secure_url, public_id: result.public_id });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -108,11 +112,11 @@ const deleteImage = async (req, res) => {
   }
 };
 
-const updateUserPassword = async (req, res) => {
+// will use email not this
+const updateUserPassword = async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
   if (!oldPassword || !newPassword) {
-    console.log("bad request");
-    res.status(400).json({ message: "please provide old pass and new pass" });
+    throw new BadRequestError("please provide old pass and new pass");
   }
   const user = await User.findOne({ _id: req.user.userId });
   // need to check user

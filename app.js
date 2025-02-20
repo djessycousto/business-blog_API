@@ -1,10 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
-require("dotenv").config();
-app.use(cookieParser(process.env.JWT_SECRET)); // ✅ Signed cookies
 const cors = require("cors");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
@@ -16,7 +15,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log(process.env.CLOUDINARY_API_SECRET, "test");
 // Set up Multer (Memory Storage)
 const storage = multer.memoryStorage();
 const upload = multer({ storage }); // ✅ Create upload instance
@@ -32,15 +30,11 @@ app.use(
   })
 );
 
-// app.use(cookieParser(process.env.JWT_SECRET)); // ✅ Signed cookies
-app.use(express.urlencoded({ extended: true })); // ✅ Allows URL-encoded data
-app.use(express.json()); // ✅ Allows JSON data
-// app.use(cors());
+app.use(cookieParser(process.env.JWT_SECRET));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-console.log(process.env.JWT_SECRET, "JWT_SECRET");
-
-// to fixe the empty cookie issue
-
+// path and EJS
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
@@ -82,8 +76,4 @@ const start = async () => {
 };
 start();
 
-// ✅ Export `upload` for use in routes
-// module.exports = { app, upload };
-// ✅ Ensure upload is exported correctly
-console.log("Exporting upload:", upload);
 module.exports = { app, upload };

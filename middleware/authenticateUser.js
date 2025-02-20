@@ -14,14 +14,13 @@ const authenticateUser = async (req, res, next) => {
       req.user = payload;
       return next();
     }
+
     const payload = isTokenValid(refreshToken);
 
     const existingToken = await Token.findOne({
       user: payload.user.userId,
       refreshToken: payload.refreshToken,
     });
-
-    console.log(existingToken, "existing token");
 
     if (!existingToken || !existingToken?.isValid) {
       throw new CustomError.UnauthenticatedError("Authentication Invalid");

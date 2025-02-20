@@ -20,10 +20,16 @@ const articleSchema = mongoose.Schema(
     },
     articlePicture: {
       type: String,
-      // default:"/upload/example" // no default
+      required: [true, "Please insert picture"],
+      validate: {
+        validator: function (v) {
+          return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/.test(v);
+        },
+        message: "Please provide a valid image URL",
+      },
     },
     categories: {
-      type: String,
+      type: [String], // Array of categories
       enum: [
         "Automobile",
         "Editors",
@@ -34,8 +40,27 @@ const articleSchema = mongoose.Schema(
         "Stock",
         "Technology",
       ],
-      default: "Guests Posts",
+      required: [true, "Please choose at least one category"],
     },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+    // views: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // likesCount: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // status: {
+    //   type: String,
+    //   enum: ["draft", "published"],
+    //   default: "draft",
+    // },
   },
   { timestamps: true }
 );

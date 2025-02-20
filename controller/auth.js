@@ -56,7 +56,6 @@ const createUser = async (req, res, next) => {
       msg: "user created verified your email ",
     });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 };
@@ -97,55 +96,34 @@ const verifyEmail = async (req, res, next) => {
   }
 };
 
-const login = async (req, res) => {
-  console.log(req.body, "req.body");
-
+const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log(email, "email");
 
     // check
-
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({ msg: "Please provide a valid credentials" });
+      throw new BadRequestError("Please provide a valid credentials");
     }
 
     const user = await User.findOne({ email });
-    // console.log(user, "after email"); //=======> my code stop here
-
-    // console.log("Entered Password:", password);
-    // console.log("Stored Hashed Password:", user.password);
-    // console.log(
-    //   "Password Match:",
-    //   await bcrypt.compare(password, user.password)
-    // );
 
     if (!user) {
-      return res.status(400).json({ msg: "Credentials invalid" });
+      throw new BadRequestError("Please provide a valid credentials");
     }
 
     // check the password
     const isPasswordCorrect = await user.comparePassword(password);
-    console.log(isPasswordCorrect);
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({ msg: "Credentials invalid" });
+      throw new BadRequestError("Credentials invalid");
     }
 
     if (!user.isVerified) {
-      return res.status(401).json({ msg: "please verify your email" });
+      throw new BadRequestError("Please verify your email before login");
     }
 
-    // console.log(user, "user in login");
-
-    // if okay
-    // need to change to create tokenUser
-
+    // if ok create user token
     const tokenUser = createTokenUser(user);
-
-    console.log(tokenUser, " tokenUser in login");
 
     // { name: user.name, userId: user._id, role: user.role };
     // Check if there is a redirect query parameter in the request
@@ -153,7 +131,7 @@ const login = async (req, res) => {
     // res.status(200).json({ msg: "loggedIn", user: tokenUser });
     // //////////===============================
 
-    // create refresh token===============//=================
+    // ===============// create refresh token//=================
     let refreshToken = "";
     // check for existing token
     const existingToken = await Token.findOne({ user: user._id });
@@ -161,7 +139,7 @@ const login = async (req, res) => {
     if (existingToken) {
       const { isValid } = existingToken;
       if (!isValid) {
-        throw new CustomError.UnauthenticatedError("Invalid Credentials");
+        throw new UnauthenticatedError("Invalid Credentials");
       }
       refreshToken = existingToken.refreshToken;
       attachCookiesToResponse({ res, user: tokenUser, refreshToken });
@@ -180,7 +158,7 @@ const login = async (req, res) => {
 
     res.status(200).json({ user: tokenUser });
   } catch (error) {
-    console.log(error, " from Login ");
+    next(error);
   }
 };
 
@@ -190,7 +168,7 @@ const logout = (req, res) => {
 
 module.exports = {
   createUser,
-  verifyEmail, // to set in router
+  verifyEmail,
   login,
   logout,
 };

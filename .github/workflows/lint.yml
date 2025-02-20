@@ -3,7 +3,8 @@ name: Lint Codebase
 on:
   push:
     branches:
-      - master
+      # - master
+      - nowhere
       - develop
   pull_request:
     branches:

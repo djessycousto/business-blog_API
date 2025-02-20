@@ -11,10 +11,8 @@ const multer = require("multer");
 // console.log("Upload middleware:", upload);
 
 const imported = require("../app");
-console.log("Imported module:", imported); // Check what is being imported
 
 // const upload = imported.upload; // Extract it properly
-// console.log("Upload middleware:", upload);
 
 // Set up Multer (Memory Storage)
 const storage = multer.memoryStorage();
@@ -30,14 +28,6 @@ const {
   deleteUser,
 } = require("../controller/user");
 const { authenticateUser } = require("../middleware/authenticateUser");
-
-// router.get("/user/verify-email", (req, res) => {
-//   res.render("emailpage");
-// });
-
-// router.get("/user/test", (req, res) => {
-//   res.render("emailpage");
-// });
 
 router.post("/user/userProfilePic", upload.single("userImage"), userPicture);
 router.route("/user").get(authenticateUser, getAllUser);
