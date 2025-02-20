@@ -23,7 +23,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "stable"
+          # node-version: "stable"
+          node-version: "20.x"
 
       - name: Install dependencies
         run: |
