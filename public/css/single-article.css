@@ -1,0 +1,36 @@
+.single-article-section-card {
+  margin: 0;
+}
+.single-article-bg {
+  --primary-color-variant: #2d2d2d;
+
+  background-color: var(--primary-color-variant);
+  padding: 0 16px;
+}
+
+.comment-wrapper-output,
+.comment-wrapper {
+  padding: 26px;
+}
+
+.comment-wrapper-output {
+  margin-bottom: 72px;
+}
+
+@media only screen and (min-width: 542px) {
+  /* .single-article-bg {
+    padding: 26px;
+  } */
+}
+
+@media only screen and (min-width: 762px) {
+  /* .single-article-bg {
+    padding: 48px;
+  } */
+}
+
+@media only screen and (min-width: 980px) {
+  /* .single-article-bg {
+    padding: 92px;
+  } */
+}

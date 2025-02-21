@@ -10,6 +10,10 @@ router.get("/category/test", (req, res) => {
   res.status(200).render("articles");
 });
 
+router.get("/category/item", (req, res) => {
+  res.status(200).render("single-article");
+});
+
 router.get("/login", (req, res) => {
   res.render("login");
 });
