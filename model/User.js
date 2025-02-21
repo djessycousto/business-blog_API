@@ -88,7 +88,8 @@ const userSchema = new mongoose.Schema(
     },
     userImage: {
       type: String,
-      default: "/uploads/placeholder.jpg", // Can use a default placeholder
+      default:
+        "https://res.cloudinary.com/dyavi52qr/image/upload/v1740099367/user-profile-pict.jpg", // Can use a default placeholder
     },
     verificationToken: {
       type: String,
@@ -129,14 +130,12 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.comparePassword = async function (userPassword) {
   try {
-    // console.log(typeof userPass, userPass);
     if (typeof userPassword !== "string" || typeof this.password !== "string") {
       throw new Error("Password comparison failed due to invalid arguments");
     }
     return await bcrypt.compare(userPassword, this.password);
   } catch (error) {
-    console.log(error, "From the passwords verification ");
-    throw new Error("From the passwords verification");
+    throw new Error("From the passwords verification", error);
   }
 };
 

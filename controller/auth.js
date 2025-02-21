@@ -105,7 +105,8 @@ const login = async (req, res, next) => {
       throw new BadRequestError("Please provide a valid credentials");
     }
 
-    const user = await User.findOne({ email });
+    // const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       throw new BadRequestError("Please provide a valid credentials");
@@ -113,6 +114,7 @@ const login = async (req, res, next) => {
 
     // check the password
     const isPasswordCorrect = await user.comparePassword(password);
+    console.log(isPasswordCorrect);
 
     if (!isPasswordCorrect) {
       throw new BadRequestError("Credentials invalid");

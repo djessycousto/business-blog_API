@@ -7,6 +7,13 @@ const articleSchema = mongoose.Schema(
       required: [true, "Please provide a title"],
       min: [4, "Please the title must have minimum 4 letter"],
     },
+
+    subTitle: {
+      type: String,
+      // required: [true, "Please provide a title"],
+      min: [4, "Please the title must have minimum 4 letter"],
+    },
+
     article: {
       type: String,
       required: [true, "Please provide a title"],
@@ -20,13 +27,14 @@ const articleSchema = mongoose.Schema(
     },
     articlePicture: {
       type: String,
-      required: [true, "Please insert picture"],
-      validate: {
-        validator: function (v) {
-          return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/.test(v);
-        },
-        message: "Please provide a valid image URL",
-      },
+      // required: [true, "Please insert picture"],
+      // validate: {
+      //   validator: function (v) {
+      //     // return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/.test(v);
+      //     // return /^(https?:\/\/[^\s]+(\.(?:png|jpg|jpeg|gif|webp)))$/.test(v);
+      //   },
+      // message: "Please provide a valid image URL",
+      // },
     },
     categories: {
       type: [String], // Array of categories
