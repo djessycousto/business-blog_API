@@ -23,7 +23,7 @@ router.post(
 );
 router
   .route("/article")
-  .get(authenticateUser, getAllArticle)
+  .get(getAllArticle)
   .post(authenticateUser, createArticle);
 // router.route("/article/picture").post(articlePicture);
 router.route("/article/:articleId").get(getSingleArticle);

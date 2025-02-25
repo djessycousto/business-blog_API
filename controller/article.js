@@ -3,6 +3,9 @@ const Article = require("../model/Article");
 const { BadRequestError } = require("../error");
 const cloudinary = require("cloudinary").v2;
 
+const localData = require("../data.json");
+const axios = require("axios");
+
 const createArticle = async (req, res, next) => {
   try {
     req.body.createBy = req.user.userId; // Assign user ID from request
@@ -16,9 +19,13 @@ const createArticle = async (req, res, next) => {
 // to be edit to include sorting
 const getAllArticle = async (req, res, next) => {
   try {
+    // console.log(localData);
+
     const article = await Article.find();
-    res.status(200).json({ article });
+    res.status(200).json({ localData });
   } catch (error) {
+    console.log(error);
+
     next(error);
   }
 };

@@ -1,4 +1,8 @@
-data:[
+{
+
+
+
+"data":[
     
     {
     "id":"1",
@@ -6,7 +10,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Technology",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
     "tags":"Editors pick"
 
 },
@@ -19,7 +23,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Technology",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
     "tags":"Editors pick"
 
 },
@@ -29,7 +33,7 @@ data:[
 "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
 "categories":"Technology",
 "subTitle":"this is just a simple title",
-"articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063909/AdobeStock_421402686_zvyjo6.jpg",
+"articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063909/AdobeStock_421402686_zvyjo6.jpg",
 "tags":"Editors pick"
 
 },
@@ -41,7 +45,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Politics",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
     "tags":"Editors pick"
 
 },
@@ -52,7 +56,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Politics",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063909/AdobeStock_421402686_zvyjo6.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063909/AdobeStock_421402686_zvyjo6.jpg",
     "tags":"Editors pick"
 
 },
@@ -65,7 +69,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Politics",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063909/AdobeStock_421402686_zvyjo6.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063909/AdobeStock_421402686_zvyjo6.jpg",
     "tags":"Editors pick"
 
 },
@@ -78,7 +82,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Health",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063910/AdobeStock_120022208_Preview_jq8psd.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063910/AdobeStock_120022208_Preview_jq8psd.jpg",
     "tags":"Editors pick"
 
 },
@@ -91,7 +95,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Health",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063910/AdobeStock_120022208_Preview_jq8psd.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063910/AdobeStock_120022208_Preview_jq8psd.jpg",
     "tags":"Editors pick"
 
 },
@@ -106,7 +110,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Automobile",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063898/AdobeStock_152984642_Preview_tamnt8.jpg"
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063898/AdobeStock_152984642_Preview_tamnt8.jpg",
     "tags":"Innovation"
 
 },
@@ -117,7 +121,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Automobile",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063894/AdobeStock_411446459_us5yaz.jpg"
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063894/AdobeStock_411446459_us5yaz.jpg",
     "tags":"Innovation"
 
 },
@@ -128,7 +132,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Automobile",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063893/AdobeStock_447411636_fykgyd.jpg"
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063893/AdobeStock_447411636_fykgyd.jpg",
     "tags":"Innovation"
 
 },
@@ -140,7 +144,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Business",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063888/AdobeStock_329526041_Preview_cky7dy.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063888/AdobeStock_329526041_Preview_cky7dy.jpg",
     "tags":"Editors pick"
 
 },
@@ -153,7 +157,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Business",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063886/AdobeStock_400834971_Preview_f4nud6.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063886/AdobeStock_400834971_Preview_f4nud6.jpg",
     "tags":"Editors pick"
 
 },
@@ -167,7 +171,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Business",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063885/AdobeStock_400830466_Preview_fc9voi.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063885/AdobeStock_400830466_Preview_fc9voi.jpg",
     "tags":"Editors pick"
 
 },
@@ -181,7 +185,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Politics",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063882/AdobeStock_450102457_ys8syp.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063882/AdobeStock_450102457_ys8syp.jpg",
     "tags":"Editors pick"
 
 },
@@ -192,7 +196,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Stock",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063875/AdobeStock_699524510_vmhvwd.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063875/AdobeStock_699524510_vmhvwd.jpg",
     "tags":"Editors pick"
 
 },
@@ -204,7 +208,7 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Stock",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063884/AdobeStock_715558750_nrcks9.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063884/AdobeStock_715558750_nrcks9.jpg",
     "tags":"Editors pick"
 
 },
@@ -216,18 +220,12 @@ data:[
     "article":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
     "categories":"Stock",
     "subTitle":"this is just a simple title",
-    "articlePicture:":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063877/AdobeStock_745515791_qmiqya.jpg",
+    "articlePicture":"https://res.cloudinary.com/dyavi52qr/image/upload/v1740063877/AdobeStock_745515791_qmiqya.jpg",
     "tags":"Editors pick"
 
-},
-
-
-
-
-
-
+}
 
 ]
 
-
+}
 
