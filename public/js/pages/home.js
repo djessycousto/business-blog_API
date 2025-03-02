@@ -6,35 +6,32 @@ import {
 
 import { fetchAllArticle } from "../fetch.js";
 
-// fetch data for home page
-
-// async function fetchAllArticle() {
-//   try {
-//     const response = await fetch("http://localhost:8080/api-blog/v1/article");
-//     const data = await response.json();
-//     const { localData } = data;
-//     const Articles = localData.data;
-//     return Articles;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
 //=============== heroSection ===================//
 
+// fetch data for home page
 async function hero() {
   const data = await fetchAllArticle();
 
   //   4 articles 1 main and 3 sub
   const heroArticle = [
-    ...data.filter(
-      (article) => console.log(article.categories === "Technology") // need to add featured:true for hero
-    ),
-    ...data.filter((article) => article.categories === "Stock").slice(0, 1),
-    ...data.filter((article) => article.categories === "Health").slice(0, 1),
+    // data.filter(
+    //   (article) => console.log(article.categories === "Technology") // need to add featured:true for hero
+    // ),
+    // data.filter((article) => {
+    //   return article.categories.includes("Technology");
+    // }), // need to add featured:true for hero
     ...data
-      .filter((article) => article.categories === "Technology")
-      .slice(0, 2),
+      .filter((article) => article.categories.includes("Technology"))
+      .slice(0, 1),
+    ...data
+      .filter((article) => article.categories.includes("Stock"))
+      .slice(0, 1),
+    ...data
+      .filter((article) => article.categories.includes("Health"))
+      .slice(0, 1),
+    ...data
+      .filter((article) => article.categories.includes("Technology"))
+      .slice(0, 1),
   ];
 
   //   i can implement a logic that pick the most liked,  recent, viewed or other feature
@@ -42,6 +39,8 @@ async function hero() {
   // hero display split in 2
 
   const articleLeftHot = heroArticle[0];
+  console.log(articleLeftHot, "hot");
+
   //   left hot topic
   const heroArticleLeft = `
                         <div class="hero-grid-1">
@@ -110,8 +109,6 @@ async function hero() {
   //     return new Date(current.createdAt) > new Date(latest.createdAt) ? current : latest;
   //   });
   //   console.log(latestEntry);
-
-  console.log(heroArticle);
 }
 hero();
 
@@ -120,7 +117,7 @@ hero();
 async function authorPickSection() {
   const data = await fetchAllArticle();
   const authorPick = data.filter((article) => {
-    return article.tags === "Editors pick";
+    return article.tags.includes("Editors pick");
   });
 
   const editorPick = authorPick.slice(0, 6);
@@ -136,7 +133,7 @@ async function card(category, classItem) {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
     // return article.categories === "Stock";
-    return article.categories === category;
+    return article.categories.includes(category);
   });
 
   const cardsTemplate = cards.slice(0, 3);
@@ -158,7 +155,7 @@ card("Politic", ".politic-container");
 async function cardTwoSection() {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
-    return article.categories === "Technology";
+    return article.categories.includes("Technology");
   });
 
   const cardsTemplate = cards.slice(0, 2);
@@ -177,14 +174,13 @@ async function leftSideArticle(category, classItem) {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
     // return article.categories === "Stock";
-    return article.categories === category;
+    return article.categories.includes(category);
   });
 
   const cardsTemplate = cards.slice(0, 1);
   // console.log(cardsTemplate[0].id, "cards Temp");
 
   const { articlePicture, tags, categories } = cardsTemplate[0];
-  console.log(tags);
 
   // call display
   const CardsImg = document.querySelector(`${classItem} .grid_card-img img`);
@@ -193,7 +189,6 @@ async function leftSideArticle(category, classItem) {
   const CardsParagraph = document.querySelector(
     `${classItem} grid_card-text p`
   );
-  console.log(CardsTag);
 
   CardsImg.src = articlePicture;
   CardsTag.textContent = tags;
@@ -203,6 +198,8 @@ async function leftSideArticle(category, classItem) {
 }
 
 leftSideArticle("Health", ".doublecardSection-left-content");
+
+// right and left
 
 // i need to add sorting by latest
 

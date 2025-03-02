@@ -22,8 +22,6 @@ const editorPickCartDOM = (data) => {
 const cartDOM = (data, sectionDom) => {
   const cards = data
     .map((article) => {
-      console.log(article, "stocks");
-
       return `
 
 

@@ -8,6 +8,8 @@ const axios = require("axios");
 
 const createArticle = async (req, res, next) => {
   try {
+    console.log(req.body);
+
     req.body.createBy = req.user.userId; // Assign user ID from request
     const article = await Article.create(req.body);
     res.status(201).json({ article });
@@ -22,10 +24,8 @@ const getAllArticle = async (req, res, next) => {
     // console.log(localData);
 
     const article = await Article.find();
-    res.status(200).json({ localData });
+    res.status(200).json({ article });
   } catch (error) {
-    console.log(error);
-
     next(error);
   }
 };

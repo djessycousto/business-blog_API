@@ -25,17 +25,19 @@ const articleSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+
     articlePicture: {
       type: String,
-      // required: [true, "Please insert picture"],
-      // validate: {
-      //   validator: function (v) {
-      //     // return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/.test(v);
-      //     // return /^(https?:\/\/[^\s]+(\.(?:png|jpg|jpeg|gif|webp)))$/.test(v);
-      //   },
-      // message: "Please provide a valid image URL",
-      // },
+      required: [true, "Please insert picture"],
+      validate: {
+        validator: function (v) {
+          // return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/.test(v);
+          return /^(https?:\/\/[^\s]+(\.(?:png|jpg|jpeg|gif|webp)))$/.test(v);
+        },
+        message: "Please provide a valid image URL",
+      },
     },
+
     categories: {
       type: [String], // Array of categories
       enum: [
@@ -43,10 +45,10 @@ const articleSchema = mongoose.Schema(
         "Editors",
         "Guests Posts",
         "Health",
-        "Must",
         "Politics",
         "Stock",
         "Technology",
+        "Business",
       ],
       required: [true, "Please choose at least one category"],
     },
@@ -58,11 +60,12 @@ const articleSchema = mongoose.Schema(
         "Editors pick",
         "Guests Posts",
         "Health",
-        "Must",
+        "Must Read",
         "Politics",
         "Stock",
         "Technology",
         // Add more specific tags if needed
+        "Guests Posts",
         "Innovation",
         "AI",
         "Business",
