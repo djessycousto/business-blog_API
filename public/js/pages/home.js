@@ -1,26 +1,29 @@
+import {
+  editorPickCartDOM,
+  cartDOM,
+  cartDOMTwoSection,
+} from "../pages/displayDom.js";
+
+import { fetchAllArticle } from "../fetch.js";
+
 // fetch data for home page
 
-async function fetchAllArticle() {
-  try {
-    const response = await fetch("http://localhost:8080/api-blog/v1/article");
-    const data = await response.json();
-    const { localData } = data;
-    // console.log(localData.data);
-    const Articles = localData.data;
-    return Articles;
-  } catch (error) {
-    console.log(error);
-  }
-}
+// async function fetchAllArticle() {
+//   try {
+//     const response = await fetch("http://localhost:8080/api-blog/v1/article");
+//     const data = await response.json();
+//     const { localData } = data;
+//     const Articles = localData.data;
+//     return Articles;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
-// hero
+//=============== heroSection ===================//
 
 async function hero() {
   const data = await fetchAllArticle();
-  //   console.log(typeof data.data.data, data);
-
-  //   const articles = Array.from(data);
-  //   console.log(data);
 
   //   4 articles 1 main and 3 sub
   const heroArticle = [
@@ -87,7 +90,7 @@ async function hero() {
 
   const heroWrapperDom = document.querySelector(".hero-wrapper");
   heroWrapperDom.innerHTML = hero;
-  console.log();
+
   //   const { id, title, articlePicture, tags, subTitle, article } =
 
   ////////====================   ////////====================
@@ -110,8 +113,98 @@ async function hero() {
 
   console.log(heroArticle);
 }
-
 hero();
+
+//=============== authorPick Section ===================//
+
+async function authorPickSection() {
+  const data = await fetchAllArticle();
+  const authorPick = data.filter((article) => {
+    return article.tags === "Editors pick";
+  });
+
+  const editorPick = authorPick.slice(0, 6);
+
+  // call display
+  editorPickCartDOM(editorPick);
+}
+authorPickSection();
+
+//=============== Card Stock ===================//
+
+async function card(category, classItem) {
+  const data = await fetchAllArticle();
+  const cards = data.filter((article) => {
+    // return article.categories === "Stock";
+    return article.categories === category;
+  });
+
+  const cardsTemplate = cards.slice(0, 3);
+
+  // console.log(cardsTemplate, "cardstem");
+
+  // call display
+  // const stockCardsWrapper = document.querySelector(".grid_card_content-wrap");
+  const stockCardsWrapper = document.querySelector(classItem);
+  cartDOM(cardsTemplate, stockCardsWrapper);
+}
+
+// stock
+card("Stock", ".grid_card_content-wrap");
+
+// politic
+card("Politic", ".politic-container");
+
+async function cardTwoSection() {
+  const data = await fetchAllArticle();
+  const cards = data.filter((article) => {
+    return article.categories === "Technology";
+  });
+
+  const cardsTemplate = cards.slice(0, 2);
+
+  // console.log(cardsTemplate, "cardstem");
+
+  // call display
+  const CardsWrapper = document.querySelector(".latest_card_content-wrap");
+  cartDOMTwoSection(cardsTemplate, CardsWrapper);
+}
+cardTwoSection();
+
+// right and left
+
+async function leftSideArticle(category, classItem) {
+  const data = await fetchAllArticle();
+  const cards = data.filter((article) => {
+    // return article.categories === "Stock";
+    return article.categories === category;
+  });
+
+  const cardsTemplate = cards.slice(0, 1);
+  // console.log(cardsTemplate[0].id, "cards Temp");
+
+  const { articlePicture, tags, categories } = cardsTemplate[0];
+  console.log(tags);
+
+  // call display
+  const CardsImg = document.querySelector(`${classItem} .grid_card-img img`);
+  const CardsTag = document.querySelector(`${classItem} .grid_card-text .tag`);
+  const CardsH2 = document.querySelector(`${classItem} .grid_card-text h2`);
+  const CardsParagraph = document.querySelector(
+    `${classItem} grid_card-text p`
+  );
+  console.log(CardsTag);
+
+  CardsImg.src = articlePicture;
+  CardsTag.textContent = tags;
+  CardsH2.textContent = `${categories}`;
+
+  //
+}
+
+leftSideArticle("Health", ".doublecardSection-left-content");
+
+// i need to add sorting by latest
 
 // const section2Posts = [
 //   ...blogPosts.filter((post) => post.category === "A").slice(0, 2),
