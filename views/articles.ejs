@@ -5,33 +5,48 @@
         <div class="article-flex">
             <section class="left-section-article">
                 <header>
-                    <h1>Dynamic Title</h1>
+                    <h1>
+                        <%= category %>
+                    </h1>
                 </header>
 
                 <article class="short-post">
                     <section class="stock-market section-card">
                         <div class="short-post-title section-card_text_header">
-                            <h1>Politics</h1>
+                            <!-- <h1>Politics</h1> -->
+                            <h1>
+
+                            </h1>
+
+
                             <!-- <span>View All-></span> -->
                         </div>
                         <div class="grid_card_content-wrap  section-grid-card-content-wrap">
-                            <div class="grid_card_content section-grid-card-content">
+                            <% articles.forEach(article=> { %>
 
-                                <div class="grid_card-img">
-                                    <img src="/images/5.jpeg" alt="">
-                                </div>
-                                <div class="grid_card-text section-card_text_body">
-                                    <h2>What Your Relationship With Stock Market Says About You</h2>
-                                    <span class="tag">Stock Market</span>
-                                    <!-- <span class="createdAt"> <span>author name</span> June 28, 2021 </span> -->
-                                    <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque nibh amet,
-                                        massa
-                                        egestas risus, gravida vel amet, imperdiet ...</p>
-                                </div>
-                                <button>Read more » </button>
-                            </div>
-                            <!-- copy -->
+                                <div class="grid_card_content section-grid-card-content">
 
+                                    <div class="grid_card-img">
+                                        <img src="/images/5.jpeg" alt="">
+                                    </div>
+                                    <div class="grid_card-text section-card_text_body">
+                                        <h2>
+                                            <%=article.title%>
+                                        </h2>
+                                        <span class="tag">
+                                            <%= article.tags%>
+                                        </span>
+                                        <!-- <span class="createdAt"> <span>author name</span> June 28, 2021 </span> -->
+                                        <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque
+                                            nibh
+                                            amet,
+                                            massa
+                                            egestas risus, gravida vel amet, imperdiet ...</p>
+                                    </div>
+                                    <button data-id="<%= article._id %>"> Read more » </button>
+                                </div>
+                                <!-- copy -->
+                                <% }) %>
 
                     </section>
 
@@ -49,10 +64,23 @@
                 </header>
                 <div class="recent-links">
 
-                    <a href="">Want a Career in Technology? Make This Your Secret Weapon</a>
-                    <a href="">15 Shocking Elon Musk Tweets About Stock Market</a>
-                    <a href="">Want a Career in Technology? Make This Your Secret Weapon</a>
-                    <a href="">15 Shocking Elon Musk Tweets About Stock Market</a>
+
+
+
+
+
+                    <!-- copy -->
+
+                    <% articles.forEach(article=> { %>
+
+
+
+                        <a href="">
+                            <%= article.title %>
+                        </a>
+
+
+                        <% }).slice(0, 4) %>
                 </div>
 
 

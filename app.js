@@ -49,7 +49,7 @@ const notFound = require("./middleware/notFound");
 const errorHandlerMiddleWare = require("./middleware/error-handler");
 
 // Endpoints
-app.use("/api-blog/v1/pages", pagesRouter);
+app.use("/api-blog/v1", pagesRouter);
 app.use("/api-blog/v1", articleRouter);
 app.use("/api-blog/v1", userRouter);
 app.use("/api-blog/v1", authRouter);

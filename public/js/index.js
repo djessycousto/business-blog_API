@@ -16,8 +16,6 @@ async function navItems() {
   // Extract the enum keys
   const navCategories = data.map((article) => article.categories).flat();
 
-  console.log(navCategories, "nav");
-
   // Remove duplicates
   const navUniqKey = [...new Set(navCategories)];
 
@@ -25,7 +23,10 @@ async function navItems() {
   navUniqKey.unshift("Home");
   //   navUniqKey = navUniqKey.sort((a, b) => a - b);
 
-  console.log(navUniqKey, "unique enum keys");
+  const baseUrl =
+    window.location.hostname === "localhost"
+      ? `${window.location.origin}/api-blog/v1`
+      : window.location.origin; // Keeps the domain in production
 
   // Map enum keys to readable names
   const navbar = navUniqKey
@@ -33,9 +34,13 @@ async function navItems() {
       let categoryName = categoryMap[enumKey] || enumKey;
 
       return `
-          <a class="links" href="">
-            <li>${categoryName}</li>
-          </a>
+     <a class="links" href="${
+       categoryName === "Home"
+         ? `${baseUrl}/home`
+         : `${baseUrl}/category/${categoryName.toLowerCase()}`
+     }">
+    <li>${categoryName}</li>
+  </a>
         `;
     })
     .join("");
