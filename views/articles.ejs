@@ -1,6 +1,5 @@
 <%- include('./partials/header.ejs') %>
 
-
     <main>
         <div class="article-flex">
             <section class="left-section-article">
@@ -14,16 +13,13 @@
                     <section class="stock-market section-card">
                         <div class="short-post-title section-card_text_header">
                             <!-- <h1>Politics</h1> -->
-                            <h1>
-
-                            </h1>
-
-
+                            <h1></h1>
                             <!-- <span>View All-></span> -->
                         </div>
-                        <div class="grid_card_content-wrap  section-grid-card-content-wrap">
-                            <% articles.forEach(article=> { %>
 
+                        <div class="grid_card_content-wrap section-grid-card-content-wrap">
+
+                            <% articles.forEach(article=> { %>
                                 <div class="grid_card_content section-grid-card-content">
 
                                     <div class="grid_card-img">
@@ -31,73 +27,50 @@
                                     </div>
                                     <div class="grid_card-text section-card_text_body">
                                         <h2>
-                                            <%=article.title%>
+                                            <%= article.title %>
                                         </h2>
                                         <span class="tag">
-                                            <%= article.tags%>
+                                            <%= article.tags %>
                                         </span>
                                         <!-- <span class="createdAt"> <span>author name</span> June 28, 2021 </span> -->
                                         <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque
-                                            nibh
-                                            amet,
-                                            massa
-                                            egestas risus, gravida vel amet, imperdiet ...</p>
+                                            nibh amet, massa egestas risus, gravida vel amet, imperdiet ...
+                                        </p>
                                     </div>
-                                    <button data-id="<%= article._id %>"> Read more » </button>
+                                    <a href="<%= baseURL %>/category/article/<%= article._id %>"> Read more » </a>
+
                                 </div>
-                                <!-- copy -->
                                 <% }) %>
 
+                        </div> <!-- Closing missing div -->
+
                     </section>
-
-
-
-
                 </article>
-
             </section>
 
             <section class="right-section-article">
-
                 <header>
                     <h1>Recent Post</h1>
                 </header>
                 <div class="recent-links">
 
-
-
-
-
-
-                    <!-- copy -->
-
                     <% articles.forEach(article=> { %>
-
-
-
-                        <a href="">
+                        <a class="recent-link" href="<%= baseURL %>/category/article/<%= article._id %>">
                             <%= article.title %>
                         </a>
-
-
-                        <% }).slice(0, 4) %>
+                        <% }) %>
                 </div>
-
 
                 <header>
                     <h1>Category</h1>
                 </header>
                 <div class="category-links">
-
                     <a href="">Technology</a>
                     <a href="">AI</a>
                 </div>
 
-
             </section>
-
         </div>
-
-
     </main>
+
     <%- include('./partials/footer.ejs') %>

@@ -3,8 +3,7 @@ const Article = require("../model/Article");
 const { BadRequestError } = require("../error");
 const cloudinary = require("cloudinary").v2;
 
-const localData = require("../data.json");
-const axios = require("axios");
+// const localData = require("../data.json");
 
 const createArticle = async (req, res, next) => {
   try {

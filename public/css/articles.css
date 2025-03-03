@@ -1,12 +1,12 @@
 .article-flex {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 /********************* left-section-article */
 
 .left-section-article {
-  border: 1px solid red;
   flex: 1 1 100%;
 }
 
@@ -19,13 +19,26 @@
   padding: 24px 0;
 }
 
-.section-grid-card-content button {
+.section-grid-card-content-wrap {
+  display: block;
+}
+
+.section-grid-card-content {
+  border-bottom: 1px solid rgb(255, 255, 255);
+  padding-bottom: 24px;
+  margin-bottom: 62px;
+}
+
+.section-grid-card-content a {
+  display: inline-block;
+  text-decoration: none;
   border: none;
   stroke: none;
   background: transparent;
   padding: 12px 0;
   color: white;
   font-size: 18px;
+  margin: 8px 0;
 }
 
 .section-grid-card-content .grid_card-text h2 {
@@ -40,11 +53,20 @@
   .left-section-article h1 {
     font-size: 32px;
   }
-
-  /********************* left-section-article */
 }
+/********************* Right-section-article */
 
 .right-section-article {
-  border: 1px solid red;
+  border-left: 1px solid rgb(255, 255, 255);
   flex: 1 1 40%;
+  padding-top: 24px;
+  padding-left: 24px;
+}
+
+.recent-links {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid yellow; */
+  padding: 16px 0;
+  gap: 16px;
 }

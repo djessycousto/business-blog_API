@@ -21,6 +21,9 @@ async function navItems() {
 
   navUniqKey.sort();
   navUniqKey.unshift("Home");
+
+  console.log(navUniqKey, "navUniqKey");
+
   //   navUniqKey = navUniqKey.sort((a, b) => a - b);
 
   const baseUrl =
