@@ -1,4 +1,7 @@
-// const displaycartDOM = () => {};
+const baseUrl =
+  window.location.hostname === "localhost"
+    ? `${window.location.origin}/api-blog/v1`
+    : window.location.origin; // Keeps the domain in production
 
 const editorPickCartDOM = (data) => {
   const editorChoice = data
@@ -8,7 +11,8 @@ const editorPickCartDOM = (data) => {
        <div class="editor-pick_card">
            <div class="editor_card_text editor-pick-1">
               <a href=""> <span class="tag">${article.tags} | ${article.categories}</span> </a>
-                  <p>Want a Career in Technology? Make This Your Secret Weapon</p>
+                     <a href="${baseUrl}/category/article/${article._id}">
+ <p>${article.title}</p></a>
           </div>
        </div>
       
@@ -18,6 +22,8 @@ const editorPickCartDOM = (data) => {
   const editorPickWrap = document.querySelector(".editor-pick-wrap");
   editorPickWrap.innerHTML = editorChoice;
 };
+
+//  crop text
 
 const cartDOM = (data, sectionDom) => {
   const cards = data
@@ -30,14 +36,14 @@ const cartDOM = (data, sectionDom) => {
         <div class="grid_card-img">
             <img src="${article.articlePicture}" alt="">
         </div>
-        <div class="grid_card-text">
-            <span class="tag">Stock Market</span>
-            <h2>What Your Relationship With Stock Market Says About You</h2>
+       <a href="${baseUrl}/category/article/${article._id}"> <div class="grid_card-text">
+            <span class="tag">${article.tags}</span>
+            <h2>${article.title}</h2>
             <span class="createdAt"> <span>author name</span> June 28, 2021 </span>
             <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque nibh amet,
                 massa
                 egestas risus, gravida vel amet, imperdiet ...</p>
-        </div>
+        </div></a>
     </div>
 
              
@@ -64,7 +70,8 @@ const cartDOMTwoSection = (data, sectionDom) => {
              <div class="latest_card-img">
                  <img src="${article.articlePicture}" alt="">
              </div>
-                 <div class="latest_card-text">
+               
+             <a href="${baseUrl}/category/article/${article._id}"><div class="latest_card-text">
                     <span class="tag">Stock Market</span>
                     <h2>What Your Relationship With Stock Market Says About You</h2>
                     <span class="createdAt"> <span>author name</span> June 28, 2021 </span>

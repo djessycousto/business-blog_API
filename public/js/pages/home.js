@@ -6,6 +6,15 @@ import {
 
 import { fetchAllArticle } from "../fetch.js";
 
+// header
+
+// const cardHeaderTitle = document.querySelector(".card-header-title");
+
+const baseUrl =
+  window.location.hostname === "localhost"
+    ? `${window.location.origin}/api-blog/v1`
+    : window.location.origin; // Keeps the domain in production
+
 //=============== heroSection ===================//
 
 // fetch data for home page
@@ -39,7 +48,7 @@ async function hero() {
   // hero display split in 2
 
   const articleLeftHot = heroArticle[0];
-  console.log(articleLeftHot, "hot");
+  // Base
 
   //   left hot topic
   const heroArticleLeft = `
@@ -47,7 +56,8 @@ async function hero() {
                         <img src="${articleLeftHot.articlePicture}" alt="title">
                         <div class="hero-grid-1_container">
                             <span class="tag">${articleLeftHot.tags}</span>
-                            <p>Want a Career in Technology? Make This Your Secret Weapon</p>
+                            <a href="${baseUrl}/category/article/${articleLeftHot._id}">
+                           <p>${articleLeftHot.title}</p></a>
                             <span class="createdAt">June 28, 2021 </span>
                         </div>
                     </div>`;
@@ -58,7 +68,7 @@ async function hero() {
 
   const heroArticleRight = articleRightHot
     .map((articleTopic) => {
-      const { id, title, articlePicture, tags, subTitle, article } =
+      const { _id, title, articlePicture, tags, subTitle, article } =
         articleTopic;
 
       return `                    <!--grid img right  -->
@@ -71,7 +81,9 @@ async function hero() {
                                 </div>
                                 <div class="hero-gid_card-text">
                                     <span class="tag">${tags}</span>
-                                    <p>${title}</p>
+
+                                    <a href="${baseUrl}/category/article/${_id}">
+                           <p>${title}</p></a>
                                     <span class="createdAt">June 28, 2021 </span>
                                 </div>
             </div>
@@ -129,7 +141,7 @@ authorPickSection();
 
 //=============== Card Stock ===================//
 
-async function card(category, classItem) {
+async function card(category, classItem, headerSelector) {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
     // return article.categories === "Stock";
@@ -138,48 +150,76 @@ async function card(category, classItem) {
 
   const cardsTemplate = cards.slice(0, 3);
 
-  // console.log(cardsTemplate, "cardstem");
+  // section // card name
+  const cardHeaderTitle = document.querySelector(headerSelector + " h1");
+  const cardHeaderViewAll = document.querySelector(headerSelector + " span");
+
+  if (cardHeaderTitle) {
+    cardHeaderTitle.textContent = category;
+  }
+
+  if (cardHeaderViewAll) {
+    const ViewAllLink = document.createElement("a");
+    ViewAllLink.setAttribute("href", `${baseUrl}/category/${category}`);
+    ViewAllLink.textContent = "View All";
+
+    // Clear previous content and append the new link
+    cardHeaderViewAll.innerHTML = "";
+    cardHeaderViewAll.appendChild(ViewAllLink);
+    console.log(cardHeaderViewAll);
+  }
 
   // call display
-  // const stockCardsWrapper = document.querySelector(".grid_card_content-wrap");
   const stockCardsWrapper = document.querySelector(classItem);
   cartDOM(cardsTemplate, stockCardsWrapper);
 }
 
-// stock
-card("Stock", ".grid_card_content-wrap");
+// stock display
+card("Stock", ".grid_card_content-wrap", ".cardheaderViewAll");
+// politic display
+card("Politic", ".politic-container", ".cardheaderViewAll-politics");
 
-// politic
-card("Politic", ".politic-container");
-
-async function cardTwoSection() {
+async function cardTwoSection(category, headerSelector) {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
-    return article.categories.includes("Technology");
+    return article.categories.includes(category);
   });
 
   const cardsTemplate = cards.slice(0, 2);
 
-  // console.log(cardsTemplate, "cardstem");
+  // section // card name
+  const cardHeaderTitle = document.querySelector(headerSelector + " h1");
+  const cardHeaderViewAll = document.querySelector(headerSelector + " span");
+
+  if (cardHeaderTitle) {
+    cardHeaderTitle.textContent = "Latest " + category;
+  }
+
+  if (cardHeaderViewAll) {
+    const ViewAllLink = document.createElement("a");
+    ViewAllLink.setAttribute("href", `${baseUrl}/category/${category}`);
+    ViewAllLink.textContent = "View All";
+
+    // Clear previous content and append the new link
+    cardHeaderViewAll.innerHTML = "";
+    cardHeaderViewAll.appendChild(ViewAllLink);
+    console.log(cardHeaderViewAll);
+  }
 
   // call display
   const CardsWrapper = document.querySelector(".latest_card_content-wrap");
   cartDOMTwoSection(cardsTemplate, CardsWrapper);
 }
-cardTwoSection();
+cardTwoSection("Technology", ".cardheaderViewLatest-technology");
 
 // right and left
-
 async function leftSideArticle(category, classItem) {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
-    // return article.categories === "Stock";
     return article.categories.includes(category);
   });
 
   const cardsTemplate = cards.slice(0, 1);
-  // console.log(cardsTemplate[0].id, "cards Temp");
-
   const { articlePicture, tags, categories } = cardsTemplate[0];
 
   // call display
@@ -197,7 +237,11 @@ async function leftSideArticle(category, classItem) {
   //
 }
 
-leftSideArticle("Health", ".doublecardSection-left-content");
+leftSideArticle(
+  "Health",
+  ".doublecardSection-left-content",
+  ".cardheaderViewLatest-technology"
+);
 
 // right and left
 
