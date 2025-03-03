@@ -150,24 +150,7 @@ async function card(category, classItem, headerSelector) {
 
   const cardsTemplate = cards.slice(0, 3);
 
-  // section // card name
-  const cardHeaderTitle = document.querySelector(headerSelector + " h1");
-  const cardHeaderViewAll = document.querySelector(headerSelector + " span");
-
-  if (cardHeaderTitle) {
-    cardHeaderTitle.textContent = category;
-  }
-
-  if (cardHeaderViewAll) {
-    const ViewAllLink = document.createElement("a");
-    ViewAllLink.setAttribute("href", `${baseUrl}/category/${category}`);
-    ViewAllLink.textContent = "View All";
-
-    // Clear previous content and append the new link
-    cardHeaderViewAll.innerHTML = "";
-    cardHeaderViewAll.appendChild(ViewAllLink);
-    console.log(cardHeaderViewAll);
-  }
+  headerTitleAndLink(category, headerSelector);
 
   // call display
   const stockCardsWrapper = document.querySelector(classItem);
@@ -203,7 +186,6 @@ async function cardTwoSection(category, headerSelector) {
     // Clear previous content and append the new link
     cardHeaderViewAll.innerHTML = "";
     cardHeaderViewAll.appendChild(ViewAllLink);
-    console.log(cardHeaderViewAll);
   }
 
   // call display
@@ -212,8 +194,8 @@ async function cardTwoSection(category, headerSelector) {
 }
 cardTwoSection("Technology", ".cardheaderViewLatest-technology");
 
-// right and left
-async function leftSideArticle(category, classItem) {
+//================ right and left article automobile and health
+async function twoArticle(category, classItem, headerSelector) {
   const data = await fetchAllArticle();
   const cards = data.filter((article) => {
     return article.categories.includes(category);
@@ -221,6 +203,8 @@ async function leftSideArticle(category, classItem) {
 
   const cardsTemplate = cards.slice(0, 1);
   const { articlePicture, tags, categories } = cardsTemplate[0];
+
+  headerTitleAndLink(category, headerSelector);
 
   // call display
   const CardsImg = document.querySelector(`${classItem} .grid_card-img img`);
@@ -237,11 +221,38 @@ async function leftSideArticle(category, classItem) {
   //
 }
 
-leftSideArticle(
+twoArticle(
   "Health",
   ".doublecardSection-left-content",
-  ".cardheaderViewLatest-technology"
+  // ".cardheaderViewLatest-technology"
+  ".doublecardSection-title-left"
 );
+twoArticle(
+  "Automobile",
+  ".doublecardSection-right-content",
+  ".doublecardSection-right-header"
+);
+
+//  headerTitleAndLink and link for view all
+function headerTitleAndLink(category, headerSelector) {
+  // section // card name
+  const cardHeaderTitle = document.querySelector(headerSelector + " h1");
+  const cardHeaderViewAll = document.querySelector(headerSelector + " span");
+
+  if (cardHeaderTitle) {
+    cardHeaderTitle.textContent = category;
+  }
+
+  if (cardHeaderViewAll) {
+    const ViewAllLink = document.createElement("a");
+    ViewAllLink.setAttribute("href", `${baseUrl}/category/${category}`);
+    ViewAllLink.textContent = "View All";
+
+    // Clear previous content and append the new link
+    cardHeaderViewAll.innerHTML = "";
+    cardHeaderViewAll.appendChild(ViewAllLink);
+  }
+}
 
 // right and left
 
