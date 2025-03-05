@@ -233,6 +233,49 @@ twoArticle(
   ".doublecardSection-right-header"
 );
 
+//===================== must read
+
+async function mustRead(category, headerSelector) {
+  const data = await fetchAllArticle();
+  const cards = data.filter((article) => {
+    return article.tags.includes(category);
+  });
+
+  const cardsTemplate = cards.slice(0, 3);
+
+  const mustCardsWrapper = document.querySelector(".must-read-article-wrap");
+  mustCardsWrapper.innerHTML = cardsTemplate
+    .map((article) => {
+      return `
+  
+   <div class="card-article-sections_content must-read-article-section-content">
+
+                                <div class="grid_card-img">
+                                    <img src="${article.articlePicture}" alt="">
+                                </div>
+                                <div class="grid_card-text">
+                                    <span class="tag">Stock Market</span>
+                                    <h2>What Your Relationship With Stock Market Says About You</h2>
+                                    <span class="createdAt"> <span>author name</span> June 28, 2021 </span>
+                                    <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque nibh amet,
+                                        massa
+                                        egestas risus, gravida vel amet, imperdiet ...</p>
+                                </div>
+                            </div>
+
+  
+  `;
+    })
+    .join(" ");
+
+  headerTitleAndLink(category, headerSelector);
+
+  // call display
+}
+
+// stock display
+mustRead("Must Read", ".must-read-header");
+
 //  headerTitleAndLink and link for view all
 function headerTitleAndLink(category, headerSelector) {
   // section // card name
