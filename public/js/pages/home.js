@@ -7,19 +7,45 @@ import {
 import { fetchAllArticle } from "../fetch.js";
 
 // header
-
-// const cardHeaderTitle = document.querySelector(".card-header-title");
-
 const baseUrl =
   window.location.hostname === "localhost"
     ? `${window.location.origin}/api-blog/v1`
     : window.location.origin; // Keeps the domain in production
+
+// ===== sort data
+
+function sorting(data) {
+  data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
 
 //=============== heroSection ===================//
 
 // fetch data for home page
 async function hero() {
   const data = await fetchAllArticle();
+
+  if (!data.createdAt) {
+    const heroArticle = [
+      ...data
+        .filter((article) => article.categories.includes("Technology"))
+        .slice(0, 1),
+      ...data
+        .filter((article) => article.categories.includes("Stock"))
+        .slice(0, 1),
+      ...data
+        .filter((article) => article.categories.includes("Health"))
+        .slice(0, 1),
+      ...data
+        .filter((article) => article.categories.includes("Technology"))
+        .slice(0, 1),
+    ];
+
+    return;
+  }
+
+  // call sorting
+
+  sorting(data);
 
   //   4 articles 1 main and 3 sub
   const heroArticle = [
@@ -131,6 +157,8 @@ async function authorPickSection() {
   const authorPick = data.filter((article) => {
     return article.tags.includes("Editors pick");
   });
+
+  // sorting(authorPick);
 
   const editorPick = authorPick.slice(0, 6);
 
@@ -296,30 +324,3 @@ function headerTitleAndLink(category, headerSelector) {
     cardHeaderViewAll.appendChild(ViewAllLink);
   }
 }
-
-// right and left
-
-// i need to add sorting by latest
-
-// const section2Posts = [
-//   ...blogPosts.filter((post) => post.category === "A").slice(0, 2),
-//   ...blogPosts.filter((post) => post.category === "B").slice(0, 3),
-//   ...blogPosts.filter((post) => post.category === "C").slice(0, 1),
-// ];
-
-// console.log("Section 2 Posts:", section2Posts);
-
-//latest
-
-// const data = {
-//     data: [
-//       { id: '1', title: 'First', categories: 'Technology', createdAt: '2025-01-01' },
-//       { id: '2', title: 'Second', categories: 'Politics', createdAt: '2025-02-01' },
-//       { id: '3', title: 'Third', categories: 'Health', createdAt: '2025-03-01' }
-//     ]
-//   };
-
-//   const latestEntry = data.data.reduce((latest, current) => {
-//     return new Date(current.createdAt) > new Date(latest.createdAt) ? current : latest;
-//   });
-//   console.log(latestEntry);
