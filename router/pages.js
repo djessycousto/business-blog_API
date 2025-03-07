@@ -4,6 +4,8 @@ const Article = require("../model/Article");
 const express = require("express");
 const router = express.Router();
 
+const { authenticateUser } = require("../middleware/authenticateUser");
+
 router.get("/home", (req, res) => {
   res.status(200).render("index");
 });
@@ -34,11 +36,20 @@ router.get("/category/:category", async (req, res) => {
   }
 });
 
+// add Auth in this route
+
 router.get("/category/article/:id", (req, res) => {
   const { id } = req.params;
 
   console.log(id);
   res.status(200).render("single-article");
+});
+
+router.get("/dashboard", (req, res) => {
+  // const { id } = req.params;
+  const user = req.user ? req.user : null;
+
+  res.status(200).render("dash", user);
 });
 
 router.get("/login", (req, res) => {

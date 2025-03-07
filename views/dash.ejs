@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <title>Dashboard</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <section class="side-menu">
+            <div class="logo-and-humb">
+                <h2>Blog</h2>
+                <div class="humb-menu">
+                    <i class="hamb fa-solid fa-bars"></i>
+                    <div class="menu">Menu</div>
+                </div>
+            </div>
+
+            <div class="dash-nav-links nav-container">
+                <nav class="nav">
+                    <a href="/allstats" class="dash-btn" data-id="allstats">All stats</a>
+                    <a href="/profile" class="dash-btn" data-id="profile">Profile</a>
+                    <a href="/add-content" class="dash-btn" data-id="add-content">Add content</a>
+                    <a href="/home" class="btn-home">Home page</a>
+                </nav>
+            </div>
+        </section>
+
+        <section class="header-and-content">
+            <section class="section-2">
+                <h2>Welcome to your Dashboard</h2>
+                <div class="main-header-content">
+                    <div class="header-block-div">
+                        <div class="header-title">
+                            <h4>Hello, <span id="user-name">User</span></h4>
+                        </div>
+                        <div class="image-section2-block">
+                            <img id="user-image" src="/default-user.png" alt="User Image">
+                        </div>
+                        <div class="logout">
+                            <h4>Logout</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="main-content-container-1" id="main-container-dash">
+                <!-- All Stats -->
+                <section class="block1 page active" id="allstats">
+                    <div class="content-container">
+                        <h1>All Stats</h1>
+                        <div class="stat"></div>
+                        <div class="stat"></div>
+                        <div class="stat"></div>
+                        <div id="wrapper-chart">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                    </div>
+
+                    <!-- Table -->
+                    <table class="EntireTable content-container">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Title</th>
+                                <th>Likes</th>
+                                <th>Views</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody"></tbody>
+                    </table>
+                </section>
+
+                <!-- Profile -->
+                <section class="block2 page" id="profile">
+                    <div class="content-container">
+                        <h1>Profile</h1>
+                        <form class="editFormProfile" enctype="multipart/form-data">
+                            <input type="hidden" id="postId" name="postIdForm">
+                            <label for="userImage">Image:</label>
+                            <input type="file" id="userImage" name="userImage">
+                            <input type="hidden" id="currentUserPicture" name="currentUserPicture">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <button id="edit-profile-submit" type="submit">Edit</button>
+                            <div class="message"></div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Add Content -->
+                <section class="block3 page" id="add-content">
+                    <div class="content-container">
+                        <h1 class="form-title">Add Content</h1>
+                        <form id="addForm" enctype="multipart/form-data">
+                            <input type="file" id="addPostPicture" name="postPicture">
+                            <input type="text" placeholder="Title" id="addTitle" name="title" required>
+                            <input type="text" placeholder="subTitle" id="subTitle" name="subtitle" required>
+
+                            <label for="addCategory">Category:</label>
+                            <select id="addCategory" name="category" required>
+                                <option value="Technology">Technology</option>
+                                <option value="Health">Health</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                            </select>
+
+                            <label for="addTags">Tags:</label>
+                            <select id="tags" name="tags" required>
+                                <option value="AI">AI</option>
+                                <option value="Fitness">Fitness</option>
+                                <option value="Investing">Investing</option>
+                                <option value="Travel">Travel</option>
+                            </select>
+
+                            <textarea placeholder="Express your mind" id="addPost" name="post" required></textarea>
+                            <button id="addPostBtn" type="submit">Publish</button>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/dash-main.js"></script>
+    <script src="/js/dashboardFct/addpostblog.js"></script>
+    <!-- <script src="/js/dashboardFct/edit-delete.js"></script> -->
+</body>
+
+</html>
