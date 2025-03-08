@@ -5,122 +5,137 @@ const baseURL =
     : window.location.origin;
 
 const addPostBtn = document.getElementById("addForm");
+
 document.addEventListener("DOMContentLoaded", () => {
   addPostBtn.addEventListener("submit", async (e) => {
     // prevent default
     e.preventDefault();
 
-    const title = document.getElementById("addTitle").value;
-    const article = document.getElementById("addPost").value;
-    const categories = document.getElementById("addCategory").value;
+    const form = document.getElementById("addForm");
+    const title = document.getElementById("title").value;
+    const article = document.getElementById("article").value;
+    const categories = document.getElementById("categories").value;
     const tags = document.getElementById("tags").value;
     const subTitle = document.getElementById("subTitle").value;
-    const postPictureInput = document.getElementById("addPostPicture");
+
+    const postPictureInput = document.getElementById("articlePicture");
+    console.log(postPictureInput.files[0]);
 
     // reset the post id
-    let articlePicture = postPictureInput.files[0];
+    // let articlePicture = postPictureInput.files[0];
 
     if (!title || !article || !categories || !tags) {
-      console.log("all field must be fill");
+      showMessage(".message-error", "All fields must be filled");
+      return;
     }
-    // if (!title) {
-    //   console.log("please field must be fill");
-    // }
-    // if (!article) {
-    //   console.log("all field must be fill");
-    // }
-    // if (!categories) {
-    //   console.log("all field must be fill");
-    // }
-
-    // if (!tags) {
-    //   console.log("all field must be fill");
-    // }
-    // form data
-
-    // if (postPicture == null) {
-    // remain data
-
-    const updateDataPost = new FormData();
-    updateDataPost.append("title", title);
-    updateDataPost.append("article", article);
-    updateDataPost.append("categories", categories);
-    updateDataPost.append("suTitle", subTitle);
-    updateDataPost.append("tags", tags);
-    // updateDataPost.append("postPicture", addpostData.postPicture.path);
-
-    for (const entry of updateDataPost.entries()) {
-      console.log(entry); //okay
-      // }
-
-      // addPostRes = await fetch("http://localhost:8080/api-blog/v1/article", {
-      //   method: "POST",
-      //   body: updateDataPost,
-      // });
-
-      // if (!addPostRes.ok) {
-      //   return console.log(
-      //     "error in the post js dash-blog data js",
-      //     addPostRes
-      //   );
-      // }
-
-      // addPost = await addPostRes.json();
-
-      // console.log(addPost, "all datasaved");
-
-      //   setTimeout(() => {
-      //     window.location.reload();
-      //   }, 200);
-      // } else {
-      //   const updateData = new FormData();
-      //   updateData.append("postPicture", postPicture);
-
-      // Append values to FormData
-
-      // // test entries
-      // for (const entry of updateData.entries()) {
-      //   console.log(entry); //okay
-      // }
-
-      // const addPostResponse = await fetch("/posts/uploadPostPic", {
-      //   method: "POST",
-      //   body: updateData,
-      // });
-
-      // if (!addPostResponse.ok) {
-      //   return console.log("error in the post js dash-blog js");
-      // }
-
-      // const addpostData = await addPostResponse.json();
-      // window.location.reload();
-
-      // // console.log(addpostData, "image saved");
-
-      // remain data
-
-      // const updateDataPost = new FormData();
-      // updateDataPost.append("title", title);
-      // updateDataPost.append("post", post);
-      // updateDataPost.append("category", category);
-      // updateDataPost.append("postPicture", addpostData.postPicture.path);
-
-      // addPostRes = await fetch("/posts", {
-      //   method: "POST",
-      //   body: updateDataPost,
-      // });
-
-      // if (!addPostRes.ok) {
-      //   return console.log("error in the post js dash-blog data js");
-      // }
-
-      // addPost = await addPostRes.json();
-      // window.location.reload();
-      // // console.log(addPost);
-
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 200);
+    if (!title) {
+      showMessage(".message-error", "Title field must be filled");
+      return;
     }
-  }); //dom
-});
+    if (!article) {
+      showMessage(".message-error", "Tell us about your article");
+      return;
+    }
+    if (!categories) {
+      showMessage(".message-error", "Chose one category");
+      return;
+    }
+
+    if (!tags) {
+      showMessage(".message-error", "Chose one tag");
+      return;
+    }
+
+    //
+
+    const postData = {
+      title,
+      article,
+      categories,
+      subTitle,
+      tags,
+    };
+
+    // upload Image
+
+    // Upload image if provided
+    if (postPictureInput.files[0]) {
+      const uploadedImageUrl = await uploadImage(postPictureInput);
+      if (!uploadedImageUrl) return; // Stop if image upload fails
+      postData.articlePicture = uploadedImageUrl;
+      console.log("Uploaded Image URL:", uploadedImageUrl);
+    } else {
+      console.log("No image file provided.");
+    }
+
+    // Send data via fetch
+    addPostRes = await fetch("/api-blog/v1/article", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }, // For URLSearchParams
+      body: JSON.stringify(postData),
+    });
+
+    // Check the response status
+    if (!addPostRes.ok) {
+      console.log(
+        "Error: Request failed",
+        addPostRes.status,
+        addPostRes.statusText
+      );
+      const errorData = await addPostRes.json(); // Try to read the error response from the server
+      showMessage(".message-error", errorData.message);
+      // console.log("Error details:", errorData);
+      return;
+    }
+
+    addPost = await addPostRes.json();
+    showMessage(".message-success", addPost.message);
+    //
+
+    // Optionally, reload page after saving
+    setTimeout(() => {
+      window.location.reload();
+      form.reset();
+    }, 6000);
+  }); // submit event listener
+}); // DOMContentLoaded event listener
+
+// image function
+
+async function uploadImage(postPictureInput) {
+  const pictureData = new FormData();
+  pictureData.append("articlePicture", postPictureInput.files[0]);
+
+  try {
+    const pictureRes = await fetch("/api-blog/v1/article/picture", {
+      method: "POST",
+      body: pictureData,
+    });
+
+    const pictureResult = await pictureRes.json();
+    if (pictureRes.ok) {
+      return pictureResult.url; // Return the Cloudinary URL
+    } else {
+      console.error("Image upload failed:", pictureResult.message);
+      showMessage(".message-error", "Image upload failed");
+      return null;
+    }
+  } catch (error) {
+    console.error("Image upload error:", error);
+    showMessage(".message-error", "Image upload error");
+    return null;
+  }
+}
+
+// animation and show message
+
+function showMessage(errorClass, errorMsg) {
+  const errorMessage = document.querySelector(errorClass);
+  errorMessage.style.display = "block";
+  errorMessage.textContent = errorMsg;
+
+  setTimeout(() => {
+    errorMessage.textContent = "";
+    errorMessage.style.display = "none";
+  }, 5000);
+}

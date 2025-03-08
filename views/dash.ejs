@@ -102,30 +102,53 @@
                 <section class="block3 page" id="add-content">
                     <div class="content-container">
                         <h1 class="form-title">Add Content</h1>
-                        <form id="addForm" enctype="multipart/form-data">
-                            <input type="file" id="addPostPicture" name="postPicture">
-                            <input type="text" placeholder="Title" id="addTitle" name="title" required>
-                            <input type="text" placeholder="subTitle" id="subTitle" name="subtitle" required>
 
+
+
+                        <form id="addForm" enctype="multipart/form-data">
+                            <input type="file" id="articlePicture" name="articlePicture">
+                            <input type="text" placeholder="Title" id="title" name="title">
+                            <input type="text" placeholder="subTitle" id="subTitle" name="subTitle">
+                            <!-- Corrected -->
                             <label for="addCategory">Category:</label>
-                            <select id="addCategory" name="category" required>
-                                <option value="Technology">Technology</option>
+                            <select id="categories" name="categories">
+                                <option value="Automobile">Automobile</option>
+                                <option value="Editors">Editors</option>
+                                <option value="Guests Posts">Guests Posts</option>
                                 <option value="Health">Health</option>
-                                <option value="Finance">Finance</option>
+                                <option value="Politics">Politics</option>
+                                <option value="Stock">Stock</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Business">Business</option>
+                            </select>
+
+
+                            <label for="tags">Tags:</label>
+                            <select id="tags" name="tags">
+                                <option value="Automobile">Automobile</option>
+                                <option value="Editors pick">Editors pick</option>
+                                <option value="Guests Posts">Guests Posts</option>
+                                <option value="Health">Health</option>
+                                <option value="Must Read">Must Read</option>
+                                <option value="Politics">Politics</option>
+                                <option value="Stock">Stock</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Innovation">Innovation</option>
+                                <option value="AI">AI</option>
+                                <option value="Business">Business</option>
                                 <option value="Lifestyle">Lifestyle</option>
                             </select>
 
-                            <label for="addTags">Tags:</label>
-                            <select id="tags" name="tags" required>
-                                <option value="AI">AI</option>
-                                <option value="Fitness">Fitness</option>
-                                <option value="Investing">Investing</option>
-                                <option value="Travel">Travel</option>
-                            </select>
 
-                            <textarea placeholder="Express your mind" id="addPost" name="post" required></textarea>
+                            <textarea placeholder="Express your mind" id="article" name="article"></textarea>
+                            <!-- Corrected -->
+                            <div class="message-dash">error message</div>
                             <button id="addPostBtn" type="submit">Publish</button>
                         </form>
+
+
+
+
                     </div>
                 </section>
             </section>

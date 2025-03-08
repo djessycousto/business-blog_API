@@ -21,7 +21,10 @@ router.post(
   upload.single("articlePicture"),
   articlePicture
 );
-router.route("/article").get(getAllArticle).post(createArticle);
+router
+  .route("/article")
+  .get(getAllArticle)
+  .post(authenticateUser, createArticle);
 // router.route("/article/picture").post(articlePicture);
 router.route("/article/:articleId").get(getSingleArticle);
 router.route("/article/:articleId").patch(editArticle);

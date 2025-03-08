@@ -28,7 +28,7 @@ const articleSchema = mongoose.Schema(
 
     articlePicture: {
       type: String,
-      required: [true, "Please insert picture"],
+      // required: [true, "Please insert picture"],
       validate: {
         validator: function (v) {
           // return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/.test(v);
@@ -36,10 +36,12 @@ const articleSchema = mongoose.Schema(
         },
         message: "Please provide a valid image URL",
       },
+      // default:
+      //   "https://res.cloudinary.com/dyavi52qr/image/upload/v1740063897/AdobeStock_239608659_Preview_1_ti5lfr.jpg",
     },
 
     categories: {
-      type: [String], // Array of categories
+      type: String, // Array of categories
       enum: [
         "Automobile",
         "Editors",
@@ -54,7 +56,7 @@ const articleSchema = mongoose.Schema(
     },
 
     tags: {
-      type: [String], // Array of tags
+      type: String, // Array of tags
       enum: [
         "Automobile",
         "Editors pick",
@@ -71,7 +73,8 @@ const articleSchema = mongoose.Schema(
         "Business",
         "Lifestyle",
       ],
-      default: [], // Optional: Empty array if no tags are selected
+      required: [true, "Please choose at least one tag"],
+      // Optional: Empty array if no tags are selected
     },
 
     comments: [

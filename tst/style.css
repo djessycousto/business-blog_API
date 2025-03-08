@@ -1,0 +1,16 @@
+.container-admin {
+  width: 60px;
+  height: 35px;
+  border: 2px solid red;
+  position: relative;
+  /* padding: 4px; */
+}
+
+.content-switch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 38px;
+  background-color: rgb(77, 77, 75);
+}

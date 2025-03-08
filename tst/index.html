@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<div class="container-admin">
+    <div class="content-switch"></div>
+</div>
+
+<body>
+
+</body>
+
+
+<script>
+    const btnSwitch = document.querySelector(".content-switch")
+
+    btnSwitch.addEventListener("click", () => {
+        /*  this is the base of admin switch*/
+
+        btnSwitch.style.left = btnSwitch.style.left === 0 + "px" ? 30 + "px" : 0 + "px"
+
+        const user = "admin";
+        console.log(user);
+        // if (btnSwitch.style.left === 0) {
+        //     btnSwitch.style.left = 30 + "px"
+        //     const user = "admin";
+
+        //     console.log(user);
+
+        // }
+        // btnSwitch.style.left = 0 + "px"
+        // const user = "user";
+        // console.log(user);
+
+
+
+
+        // console.log();
+
+
+
+
+    })
+</script>
+
+</html>

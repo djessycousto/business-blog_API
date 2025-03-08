@@ -8,17 +8,17 @@
     => Create user // Done ✔️
     => Login // Done ✔️
     => Logout 
-    => send email (rest to fix origin) ~
-    => email verification (connect with link front end)~
+    => send email (rest to fix origin) ~ // reset passwords left 
+    => email verification (connect with link front end) ✔️
 
     note on the password i need to add is modified
 
-    2. user
+    2. user 
     => get all user // Done ✔️
     => single user // Done ✔️
     => delete user // Done first delete only ✔️
-    => delete completely user // 
-    => picture user // 
+    => delete completely user // ✔️
+    => picture user // ✔️
 
 
 

@@ -1,0 +1,10 @@
+.email-container {
+  width: 60%;
+  padding: 20px;
+  background-color: rgb(100, 100, 100);
+  margin: 72px auto;
+}
+
+.email-container h1 {
+  font-size: 46px;
+}

@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./partials/header.ejs') %>
+    <link rel="stylesheet" href="/css/email.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>email verification </title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>email verification </title>
+    </head>
 
-<body>
-    <div>
-        <H1>hello welcome to the verification pages</H1>
-        <div class="message"></div>
-    </div>
+    <body>
+        <div class="email-container">
+            <H1>hello welcome to the verification pages</H1>
+            <div class="message"></div>
+        </div>
 
-    <script src="/js/verification-email.js"></script>
-</body>
+        <script src="/js/verification-email.js"></script>
+    </body>
 
-</html>
+    </html>
+    <%- include('./partials/footer.ejs') %>

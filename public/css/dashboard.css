@@ -11,12 +11,10 @@ main {
 }
 
 .side-menu {
-  /* border: 1px solid greenyellow; */
   width: 200px;
-
+  height: 100vh;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   background-color: white;
   /* justify-content: center; */
@@ -422,5 +420,25 @@ input[type="file"]::file-selector-button:active {
 }
 
 .editformpost {
+  display: none;
+}
+
+/* #addForm {
+  position: relative;
+} */
+
+.message-error {
+  padding: 16px 8px;
+  background-color: rgb(245, 0, 0);
+  color: white;
+  text-align: center;
+  display: none;
+}
+
+.message-success {
+  padding: 16px 8px;
+  background-color: rgb(245, 0, 0);
+  color: white;
+  text-align: center;
   display: none;
 }

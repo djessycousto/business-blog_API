@@ -7,11 +7,31 @@ const cloudinary = require("cloudinary").v2;
 
 const createArticle = async (req, res, next) => {
   try {
-    console.log(req.body);
+    if (!req.body.title) {
+      return res.status(400).json({ message: "Title is required" });
+    }
+
+    if (!req.body.article) {
+      return res.status(400).json({ message: "Article content is required" });
+    }
+
+    if (!req.body.categories) {
+      return res.status(400).json({ message: "Category is required" });
+    }
+
+    if (!req.body.tags) {
+      return res.status(400).json({ message: "Tags are required" });
+    }
+
+    console.log(req.body, "from create article");
+    // console.log(req.body);
 
     req.body.createBy = req.user.userId; // Assign user ID from request
+
+    console.log(req.body.createBy);
+
     const article = await Article.create(req.body);
-    res.status(201).json({ article });
+    res.status(201).json({ article, message: "Article created successfully" });
   } catch (error) {
     next(error);
   }
