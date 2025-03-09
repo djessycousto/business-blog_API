@@ -1,3 +1,5 @@
+const { count } = require("console");
+
 ///############## ADD post  ########################
 const baseURL =
   window.location.hostname === "localhost"
@@ -11,27 +13,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // prevent default
     e.preventDefault();
 
+    //==================Form Element============================
     const form = document.getElementById("addForm");
     const title = document.getElementById("title").value;
     const article = document.getElementById("article").value;
     const categories = document.getElementById("categories").value;
     const tags = document.getElementById("tags").value;
     const subTitle = document.getElementById("subTitle").value;
-
     const postPictureInput = document.getElementById("articlePicture");
     console.log(postPictureInput.files[0]);
 
-    // reset the post id
-    // let articlePicture = postPictureInput.files[0];
-
-    if (!title || !article || !categories || !tags) {
+    //=======================checks
+    if (
+      !title.value.trim() ||
+      !article.value.trim() ||
+      !categories.value ||
+      !tags.value
+    ) {
       showMessage(".message-error", "All fields must be filled");
       return;
     }
-    if (!title) {
+
+    if (!title.value === null || !title.trim()) {
       showMessage(".message-error", "Title field must be filled");
       return;
     }
+
+    if (!characterCount(title, 30)) return; // Character count logic
+
     if (!article) {
       showMessage(".message-error", "Tell us about your article");
       return;
@@ -46,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    //
+    //==================Object to send
 
     const postData = {
       title,
@@ -56,9 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
       tags,
     };
 
-    // upload Image
-
-    // Upload image if provided
+    // =========upload Image
+    //================== Upload image if provided
     if (postPictureInput.files[0]) {
       const uploadedImageUrl = await uploadImage(postPictureInput);
       if (!uploadedImageUrl) return; // Stop if image upload fails
@@ -68,14 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("No image file provided.");
     }
 
-    // Send data via fetch
+    //========================Send data via fetch
     addPostRes = await fetch("/api-blog/v1/article", {
       method: "POST",
       headers: { "Content-Type": "application/json" }, // For URLSearchParams
       body: JSON.stringify(postData),
     });
 
-    // Check the response status
+    //=====================Check the response status
     if (!addPostRes.ok) {
       console.log(
         "Error: Request failed",
@@ -83,8 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addPostRes.statusText
       );
       const errorData = await addPostRes.json(); // Try to read the error response from the server
-      showMessage(".message-error", errorData.message);
-      // console.log("Error details:", errorData);
+      showMessage(".message-error", addPostRes.statusText);
       return;
     }
 
@@ -139,3 +146,20 @@ function showMessage(errorClass, errorMsg) {
     errorMessage.style.display = "none";
   }, 5000);
 }
+
+//========================== input character count ===============//
+
+const characterCount = (inputName, maxLength) => {
+  const charCount = inputName.value.replace(/\s/g, "").length;
+
+  if (charCount > maxLength) {
+    input.value = input.value.slice(0, maxLength);
+    showMessage(
+      ".message-error",
+      `Title must have fewer than ${maxLength} characters`
+    );
+    return false; // Indicate error
+  }
+
+  return true; // Indicate success
+};
