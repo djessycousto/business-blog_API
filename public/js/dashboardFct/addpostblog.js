@@ -1,5 +1,3 @@
-const { count } = require("console");
-
 ///############## ADD post  ########################
 const baseURL =
   window.location.hostname === "localhost"
@@ -34,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (!title.value === null || !title.trim()) {
+    if (!title === null || !title.trim()) {
       showMessage(".message-error", "Title field must be filled");
       return;
     }

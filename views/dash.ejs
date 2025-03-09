@@ -68,7 +68,6 @@
                     <table class="EntireTable content-container">
                         <thead>
                             <tr>
-                                <th>Role</th>
                                 <th>Title</th>
                                 <th>Likes</th>
                                 <th>Views</th>
@@ -93,25 +92,28 @@
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" required>
                             <button id="edit-profile-submit" type="submit">Edit</button>
-                            <div class="message"></div>
+                            <div class="message-edit-profile"></div>
                         </form>
                     </div>
                 </section>
 
-                <!-- Add Content -->
+                <!--============= Add Content ==================-->
                 <section class="block3 page" id="add-content">
                     <div class="content-container">
-                        <h1 class="form-title">Add Content</h1>
+                        <h1 class="form-title">Add Contents</h1>
 
 
 
                         <form id="addForm" enctype="multipart/form-data">
+                            <input type="hidden" id="articleId" name="articleId"> <!-- Hidden input for Edit mode -->
+
                             <input type="file" id="articlePicture" name="articlePicture">
                             <input type="text" placeholder="Title" id="title" name="title">
                             <input type="text" placeholder="subTitle" id="subTitle" name="subTitle">
                             <!-- Corrected -->
                             <label for="addCategory">Category:</label>
                             <select id="categories" name="categories">
+                                <option value="Automobile"></option>
                                 <option value="Automobile">Automobile</option>
                                 <option value="Editors">Editors</option>
                                 <option value="Guests Posts">Guests Posts</option>
@@ -125,6 +127,7 @@
 
                             <label for="tags">Tags:</label>
                             <select id="tags" name="tags">
+                                <option value="Automobile"></option>
                                 <option value="Automobile">Automobile</option>
                                 <option value="Editors pick">Editors pick</option>
                                 <option value="Guests Posts">Guests Posts</option>
@@ -144,7 +147,81 @@
                             <!-- Corrected -->
                             <div class="message-dash">error message</div>
                             <button id="addPostBtn" type="submit">Publish</button>
+                            <button id="editForm" type="submit">Publish</button>
                         </form>
+
+
+
+
+
+                        <!-- edit form  -->
+
+                        <!-- edit  -->
+                        <div class="editformpost">
+                            <h1 class="form-title">Edit content</h1>
+
+
+                            <div class="edit-form">
+
+
+
+                                <!-- Edit Form -->
+
+                                <form id="addForm" enctype="multipart/form-data">
+                                    <!-- <input type="hidden" id="articleId" name="articleId"> -->
+                                    <!-- Hidden input for Edit mode -->
+
+                                    <input type="file" id="articlePicture" name="articlePicture">
+                                    <input type="text" placeholder="Title" id="title" name="title">
+                                    <input type="text" placeholder="subTitle" id="subTitle" name="subTitle">
+                                    <!-- Corrected -->
+                                    <label for="addCategory">Category:</label>
+                                    <select id="categories" name="categories">
+                                        <option value="Automobile"></option>
+                                        <option value="Automobile">Automobile</option>
+                                        <option value="Editors">Editors</option>
+                                        <option value="Guests Posts">Guests Posts</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Politics">Politics</option>
+                                        <option value="Stock">Stock</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+
+
+                                    <label for="tags">Tags:</label>
+                                    <select id="tags" name="tags">
+                                        <option value="Automobile"></option>
+                                        <option value="Automobile">Automobile</option>
+                                        <option value="Editors pick">Editors pick</option>
+                                        <option value="Guests Posts">Guests Posts</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Must Read">Must Read</option>
+                                        <option value="Politics">Politics</option>
+                                        <option value="Stock">Stock</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Innovation">Innovation</option>
+                                        <option value="AI">AI</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Lifestyle">Lifestyle</option>
+                                    </select>
+
+
+                                    <textarea placeholder="Express your mind" id="article" name="article"></textarea>
+                                    <!-- Corrected -->
+                                    <div class="message-dash">error message</div>
+                                    <button id="addPostBtn" type="submit">Publish</button>
+                                    <button id="editForm" type="submit">Publish</button>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
 
 
 
@@ -157,8 +234,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/dash-main.js"></script>
-    <script src="/js/dashboardFct/addpostblog.js"></script>
-    <!-- <script src="/js/dashboardFct/edit-delete.js"></script> -->
+    <script type="module" src="/js/dashboardFct/allstats.js"></script>
+    <script type="module" src="/js/dashboardFct/addpostblog.js"></script>
+    <script type="module" src="/js/dashboardFct/edit.js"></script>
+    <script type="module" src="/js/dashboardFct/table.js"></script>
 </body>
 
 </html>
