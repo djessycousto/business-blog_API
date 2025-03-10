@@ -99,18 +99,194 @@
 
                 <!--============= Add Content ==================-->
                 <section class="block3 page" id="add-content">
-                    <div class="content-container">
-                        <h1 class="form-title">Add Contents</h1>
+                    <div class=" addForm-container content-container">
+                        <h1 class="form-title">Add Content</h1>
+
+
+                        <div class="addpost-form ">
+                            <form id="addForm" enctype="multipart/form-data">
+                                <!-- <input type="hidden" id="articleId" name="articleId"> -->
+                                <!-- Hidden input for Edit mode -->
+
+                                <input type="file" id="articlePicture" name="articlePicture">
+                                <!-- <input type="hidden" id="currentPostPicture" value="test" name="currentPostPicture"> -->
+                                <!-- Show existing image name -->
+                                <div id="imageNameDisplay"></div>
+
+                                <input type="text" placeholder="Title" id="title" name="title">
+                                <input type="text" placeholder="subTitle" id="subTitle" name="subTitle">
+                                <!-- Corrected -->
+                                <label for="addCategory">Category:</label>
+                                <select id="categories" name="categories">
+                                    <option value="Automobile"></option>
+                                    <option value="Automobile">Automobile</option>
+                                    <option value="Editors">Editors</option>
+                                    <option value="Guests Posts">Guests Posts</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Stock">Stock</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Business">Business</option>
+                                </select>
+
+
+                                <label for="tags">Tags:</label>
+                                <select id="tags" name="tags">
+                                    <option value="Automobile"></option>
+                                    <option value="Automobile">Automobile</option>
+                                    <option value="Editors pick">Editors pick</option>
+                                    <option value="Guests Posts">Guests Posts</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Must Read">Must Read</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Stock">Stock</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Innovation">Innovation</option>
+                                    <option value="AI">AI</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Lifestyle">Lifestyle</option>
+                                </select>
+
+
+                                <textarea placeholder="Express your mind" id="article" name="article"></textarea>
+                                <!-- Corrected -->
+                                <div class="message-dash">error message</div>
+                                <button id="addPostBtn" type="submit">Publish</button>
+                            </form>
+                        </div>
+
+
+                        <!-- ============edit============ -->
+                        <div class="edit-form ">
+                            <form id="editForm" enctype="multipart/form-data">
+                                <input type="hidden" id="articleId" name="articleId">
+                                <!-- Hidden input for Edit mode -->
+
+                                <input type="file" id="edit-articlePicture" name="articlePicture">
+                                <input type="hidden" id="currentPostPicture" name="currentPostPicture">
+                                <div id="edit-imageNameDisplay"></div>
+
+                                <input type="text" placeholder="Title" id="edit-title" name="title">
+                                <input type="text" placeholder="subTitle" id="edit-subTitle" name="subTitle">
+
+                                <label for="addCategory">Category:</label>
+                                <select id="edit-categories" name="categories">
+                                    <option value="Automobile"></option>
+                                    <option value="Automobile">Automobile</option>
+                                    <option value="Editors">Editors</option>
+                                    <option value="Guests Posts">Guests Posts</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Stock">Stock</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Business">Business</option>
+                                </select>
+
+                                <label for="tags">Tags:</label>
+                                <select id="edit-tags" name="tags">
+                                    <option value="Automobile"></option>
+                                    <option value="Automobile">Automobile</option>
+                                    <option value="Editors pick">Editors pick</option>
+                                    <option value="Guests Posts">Guests Posts</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Must Read">Must Read</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Stock">Stock</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Innovation">Innovation</option>
+                                    <option value="AI">AI</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Lifestyle">Lifestyle</option>
+                                </select>
+
+                                <textarea placeholder="Express your mind" id="edit-article" name="article"></textarea>
+                                <div class="message-dash">error message</div>
+                                <button id="updatePostBtn" type="submit">Update</button>
+                            </form>
+
+                        </div>
+
+
+                        <!-- edit form -->
 
 
 
-                        <form id="addForm" enctype="multipart/form-data">
-                            <input type="hidden" id="articleId" name="articleId"> <!-- Hidden input for Edit mode -->
+
+
+
+
+
+
+
+                    </div>
+                </section>
+
+
+
+
+
+                <!-- edit  -->
+
+
+
+
+                <div class="test-section">
+
+
+
+                    <section class="block3 page" id="edit-content">
+                        <div class="addForm-container content-container">
+                            <h1 class="form-title">Edit Content</h1>
+
+
+                        </div>
+                    </section>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <!-- edit  -->
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+
+
+            <div class="test-section">
+
+
+
+                <section class="block3 page" id="edit-content">
+                    <div class="addForm-container content-container">
+                        <h1 class="form-title">Edit Content</h1>
+
+                        <form id="editForm" enctype="multipart/form-data">
+                            <input type="hidden" id="articleId" name="articleId">
+                            <!-- Hidden input for Edit mode -->
 
                             <input type="file" id="articlePicture" name="articlePicture">
+                            <input type="hidden" id="currentPostPicture" value="test" name="currentPostPicture">
+                            <div id="imageNameDisplay"></div>
+
                             <input type="text" placeholder="Title" id="title" name="title">
                             <input type="text" placeholder="subTitle" id="subTitle" name="subTitle">
-                            <!-- Corrected -->
+
                             <label for="addCategory">Category:</label>
                             <select id="categories" name="categories">
                                 <option value="Automobile"></option>
@@ -123,7 +299,6 @@
                                 <option value="Technology">Technology</option>
                                 <option value="Business">Business</option>
                             </select>
-
 
                             <label for="tags">Tags:</label>
                             <select id="tags" name="tags">
@@ -142,93 +317,24 @@
                                 <option value="Lifestyle">Lifestyle</option>
                             </select>
 
-
                             <textarea placeholder="Express your mind" id="article" name="article"></textarea>
-                            <!-- Corrected -->
                             <div class="message-dash">error message</div>
-                            <button id="addPostBtn" type="submit">Publish</button>
-                            <button id="editForm" type="submit">Publish</button>
+                            <button id="updatePostBtn" type="submit">Update</button>
                         </form>
-
-
-
-
-
-                        <!-- edit form  -->
-
-                        <!-- edit  -->
-                        <div class="editformpost">
-                            <h1 class="form-title">Edit content</h1>
-
-
-                            <div class="edit-form">
-
-
-
-                                <!-- Edit Form -->
-
-                                <form id="addForm" enctype="multipart/form-data">
-                                    <!-- <input type="hidden" id="articleId" name="articleId"> -->
-                                    <!-- Hidden input for Edit mode -->
-
-                                    <input type="file" id="articlePicture" name="articlePicture">
-                                    <input type="text" placeholder="Title" id="title" name="title">
-                                    <input type="text" placeholder="subTitle" id="subTitle" name="subTitle">
-                                    <!-- Corrected -->
-                                    <label for="addCategory">Category:</label>
-                                    <select id="categories" name="categories">
-                                        <option value="Automobile"></option>
-                                        <option value="Automobile">Automobile</option>
-                                        <option value="Editors">Editors</option>
-                                        <option value="Guests Posts">Guests Posts</option>
-                                        <option value="Health">Health</option>
-                                        <option value="Politics">Politics</option>
-                                        <option value="Stock">Stock</option>
-                                        <option value="Technology">Technology</option>
-                                        <option value="Business">Business</option>
-                                    </select>
-
-
-                                    <label for="tags">Tags:</label>
-                                    <select id="tags" name="tags">
-                                        <option value="Automobile"></option>
-                                        <option value="Automobile">Automobile</option>
-                                        <option value="Editors pick">Editors pick</option>
-                                        <option value="Guests Posts">Guests Posts</option>
-                                        <option value="Health">Health</option>
-                                        <option value="Must Read">Must Read</option>
-                                        <option value="Politics">Politics</option>
-                                        <option value="Stock">Stock</option>
-                                        <option value="Technology">Technology</option>
-                                        <option value="Innovation">Innovation</option>
-                                        <option value="AI">AI</option>
-                                        <option value="Business">Business</option>
-                                        <option value="Lifestyle">Lifestyle</option>
-                                    </select>
-
-
-                                    <textarea placeholder="Express your mind" id="article" name="article"></textarea>
-                                    <!-- Corrected -->
-                                    <div class="message-dash">error message</div>
-                                    <button id="addPostBtn" type="submit">Publish</button>
-                                    <button id="editForm" type="submit">Publish</button>
-                                </form>
-
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </section>
-            </section>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
         </section>
     </main>
 

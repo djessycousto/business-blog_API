@@ -38,26 +38,49 @@ Using the add article for edit as well
 // Fetch and populate edit form data
 const fetchEditData = async (articleId) => {
   try {
-    const response = await fetch(`/posts/${articleId}`);
-    const { post } = await response.json();
+    const response = await fetch(`/api-blog/v1/article/${articleId}`);
+    const data = await response.json();
+    const { article } = data;
+
+    // const { article } = await response.json();
 
     //==================populate Element============================
-    const form = document.getElementById("addForm");
-    const title = (document.getElementById("title").value = article.title);
-    const article = (document.getElementById("article").value =
+    const form = document.getElementById("editForm");
+    const title = (document.getElementById("edit-title").value = article.title);
+    const blog = (document.getElementById("edit-article").value =
       article.article);
-    // const author = document.getElementById("author").value = article.author;
-    const categories = (document.getElementById("categories").value =
+    // // const author = document.getElementById("author").value = article.author;
+    const categories = (document.getElementById("edit-categories").value =
       article.categories);
-    const tags = (document.getElementById("tags").value = article.tags);
-    const subTitle = (document.getElementById("subTitle").value =
+    const tags = (document.getElementById("edit-tags").value = article.tags);
+    const subTitle = (document.getElementById("edit-subTitle").value =
       article.subTitle);
-    const postPictureInput = (document.getElementById("articlePicture").value =
-      article.postPicture);
+    const postPictureInput = document.getElementById("edit-articlePicture");
+    //   article.postPicture);
+    const id = (document.getElementById("articleId").value = article._id);
+
+    const editImageNameDisplay = document.getElementById(
+      "edit-imageNameDisplay"
+    );
+
+    const currentImage = (document.getElementById("currentPostPicture").value =
+      article.articlePicture);
+    // Display current image name on load
+    if (currentImage) {
+      const imageName = currentImage.split("/").pop();
+      // Extracts filename from URL
+      editImageNameDisplay.textContent = `Current Image: ${imageName}`;
+    }
+
+    // Update name display if a new file is uploaded
+    postPictureInput.addEventListener("change", (e) => {
+      const newFile = e.target.files[0];
+      if (newFile) {
+        editImageNameDisplay.textContent = `New Image: ${newFile.name}`;
+      }
+    });
 
     // Set the hidden input with the current image path
-    document.getElementById("currentPostPicture").value =
-      article.articlePicture;
   } catch (error) {
     console.error("Error fetching post data:", error);
   }
@@ -69,7 +92,9 @@ const handleFormSubmit = async (e) => {
 
   const editForm = document.querySelector("#editForm");
   const articleId = document.getElementById("articleId").value;
-  const postPictureInput = document.getElementById("editPostPicture");
+  console.log(articleId, "articleId"); // done
+
+  const postPictureInput = document.getElementById("edit-articlePicture");
   const currentPostPicture =
     document.getElementById("currentPostPicture").value;
 
@@ -84,10 +109,11 @@ const handleFormSubmit = async (e) => {
 
   // Handle new or existing image
   const newPostPicture = postPictureInput.files[0];
+  console.log(newPostPicture);
   if (newPostPicture) {
     // Handle new image upload
     const imageFormData = new FormData();
-    imageFormData.append("postPicture", newPostPicture);
+    imageFormData.append("articlePicture", newPostPicture);
 
     try {
       const imageResponse = await fetch(`/api-blog/v1/article/picture`, {
@@ -107,12 +133,14 @@ const handleFormSubmit = async (e) => {
   } else {
     // Use the existing image path
     updateData.postPicture = currentPostPicture;
-    window.location.reload();
+    console.log(updateData.postPicture);
+
+    // window.location.reload();
   }
 
   // Send update request
   try {
-    const response = await fetch(`/api-blog/v1/article"/${articleId}`, {
+    const response = await fetch(`/api-blog/v1/article/${articleId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),
@@ -120,7 +148,9 @@ const handleFormSubmit = async (e) => {
 
     if (response.ok) {
       console.log("Post updated successfully");
-      window.location.reload(); // Optionally refresh the page
+      console.log(response.statusText);
+
+      //   window.location.reload(); // Optionally refresh the page
     } else {
       console.error(`Failed to update post: ${response.status}`);
     }
