@@ -7,7 +7,7 @@ async function fetchAllArticle() {
     // const Articles = localData.data;
     return article;
   } catch (error) {
-    console.log(error);
+    throw Error("Server error");
   }
 }
 

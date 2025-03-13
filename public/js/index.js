@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 //======================  Display function search
 function displaySearchResults(article, searchTerm, success) {
+  const loader = document.getElementById("loader");
   const searchTitle = document.querySelector(".search-title header h1");
   console.log(searchTitle);
 
@@ -138,7 +139,7 @@ function displaySearchResults(article, searchTerm, success) {
   `;
     })
     .join("");
-
+  loader.style.display = "none"; // Hide loader after data is loaded
   resultsContainer.innerHTML = "";
   resultsContainer.innerHTML = articleData;
 }

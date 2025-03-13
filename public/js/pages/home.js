@@ -12,6 +12,8 @@ const baseUrl =
     ? `${window.location.origin}/api-blog/v1`
     : window.location.origin; // Keeps the domain in production
 
+const loader = document.getElementById("loader");
+
 // ===== sort data
 
 function sorting(data) {
@@ -23,7 +25,6 @@ function sorting(data) {
 // fetch data for home page
 async function hero() {
   const data = await fetchAllArticle();
-  console.log(data);
 
   // if (!data.createdAt) {
   //   const heroArticle = [
@@ -126,6 +127,7 @@ async function hero() {
              </div>
   `;
 
+  loader.style.display = "none"; // Hide loader after data is loaded
   const heroWrapperDom = document.querySelector(".hero-wrapper");
   heroWrapperDom.innerHTML = hero;
 
