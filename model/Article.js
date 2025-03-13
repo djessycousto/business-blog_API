@@ -44,7 +44,7 @@ const articleSchema = mongoose.Schema(
       type: String, // Array of categories
       enum: [
         "Automobile",
-        "Editors",
+        // "Editors",
         "Guests Posts",
         "Health",
         "Politics",

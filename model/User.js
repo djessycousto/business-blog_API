@@ -1,55 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-// const userSchema = mongoose.Schema({
-//   username: {
-//     type: String,
-//     trim: true,
-//     required: [true, "Please provide a username"],
-//     min: [4, "Please the username must have minimum 4 letter"],
-//   },
-//   aboutTheUser: {
-//     type: String,
-//     trim: true,
-//     required: [true, "Please provide about"],
-//     min: [150, "Please tell us more about you at least 150 character"],
-//   },
-
-//   email: {
-//     type: String,
-//     trim: true,
-//     unique: true,
-//     required: [true, "Please provide an email"],
-//   },
-//   password: {
-//     type: String,
-//     trim: true,
-//     required: [true, "please the password is required"],
-//     // add min
-//   },
-
-//   userImage: {
-//     type: String,
-//     default: "/uploads/placeholder.jpg", // no default
-//   },
-//   verificationToken: {
-//     type: String,
-//     // required:true
-//   },
-//   isVerified: {
-//     type: Boolean,
-//     default: false,
-//   },
-
-//   role: {
-//     type: String,
-//     enum: ["admin", "user", "owner"],
-//     default: "user",
-//   },
-//   verified: {
-//     type: Date,
-//     default: Date.now,
-//   },
-// });
 
 //===== hash the password and Compare password=======//
 
@@ -107,6 +57,15 @@ const userSchema = new mongoose.Schema(
     verified: {
       type: Date,
       default: null, // Only set once verified
+    },
+
+    passwordToken: {
+      type: String,
+      default: null,
+    },
+    passwordTokenExpiration: {
+      type: Date,
+      default: null,
     },
   },
   { timestamps: true }

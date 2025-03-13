@@ -164,8 +164,28 @@ const login = async (req, res, next) => {
   }
 };
 
-const logout = (req, res) => {
-  res.send("Logout");
+const logout = async (req, res) => {
+  await Token.findOneAndDelete({ user: req.user.userId });
+
+  res.cookie("accessToken", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+
+  // refresh cookie res
+  res.cookie("refreshToken", refreshTokenJWT, {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.status(200).json({ msg: "user logged out" });
+};
+
+const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+};
+
+const resetPassword = async (req, res) => {
+  const { email } = req.body;
 };
 
 module.exports = {
@@ -173,4 +193,6 @@ module.exports = {
   verifyEmail,
   login,
   logout,
+  forgetPassword,
+  resetPassword,
 };

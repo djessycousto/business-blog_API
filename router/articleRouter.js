@@ -13,8 +13,12 @@ const {
   articlePicture,
   editArticle,
   deleteArticle,
+  getSearchArticle,
 } = require("../controller/article");
-const { authenticateUser } = require("../middleware/authenticateUser");
+const {
+  authenticateUser,
+  authorizePermissions,
+} = require("../middleware/authenticateUser");
 
 router.post(
   "/article/picture",
@@ -24,8 +28,11 @@ router.post(
 router
   .route("/article")
   .get(getAllArticle)
+
   .post(authenticateUser, createArticle);
 // router.route("/article/picture").post(articlePicture);
+
+router.route("/article/search").get(getSearchArticle);
 router.route("/article/:articleId").get(getSingleArticle);
 router.route("/article/:articleId").patch(editArticle);
 router.route("/article/:articleId").delete(deleteArticle);

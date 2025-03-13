@@ -42,8 +42,57 @@ const getAllArticle = async (req, res, next) => {
   try {
     // console.log(localData);
 
-    const article = await Article.find();
+    const article = await Article.find().sort({ createdAt: -1 });
     res.status(200).json({ article });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getSearchArticle = async (req, res, next) => {
+  try {
+    const { search, page, limit } = req.query;
+    console.log("Query params:", req.query);
+
+    console.log(search, page, limit);
+    const queryObject = {};
+    // Search filter (e.g., search by title or content)
+    if (search) {
+      queryObject.$or = [
+        { title: { $regex: search, $options: "i" } }, // Case-insensitive search
+        { article: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Search filter
+    // if (search && search.trim() !== "") {
+    //   queryObject.$or = [
+    //     { title: { $regex: `\\b${search}\\b`, $options: "i" } },
+    //     { article: { $regex: `\\b${search}\\b`, $options: "i" } },
+    //   ];
+    // }
+
+    // Category filter
+    // if (categories && categories.trim() !== "") {
+    //   queryObject.categories = categories;
+    //   console.log(queryObject.categories);
+    // }
+
+    const article = await Article.find(queryObject)
+      .skip((page - 1) * limit)
+      .limit(Number(limit))
+      .sort({ createdAt: -1 }); // Example: Sort by newest first
+
+    const totalArticles = await Article.countDocuments(queryObject);
+
+    res.status(200).json({
+      success: true,
+      count: article.length,
+      totalArticles,
+      totalPages: Math.ceil(totalArticles / limit) || 1,
+      currentPage: Number(page),
+      article,
+    });
   } catch (error) {
     next(error);
   }
@@ -150,4 +199,5 @@ module.exports = {
   articlePicture,
   editArticle,
   deleteArticle,
+  getSearchArticle,
 };

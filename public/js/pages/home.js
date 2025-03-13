@@ -23,25 +23,26 @@ function sorting(data) {
 // fetch data for home page
 async function hero() {
   const data = await fetchAllArticle();
+  console.log(data);
 
-  if (!data.createdAt) {
-    const heroArticle = [
-      ...data
-        .filter((article) => article.categories.includes("Technology"))
-        .slice(0, 1),
-      ...data
-        .filter((article) => article.categories.includes("Stock"))
-        .slice(0, 1),
-      ...data
-        .filter((article) => article.categories.includes("Health"))
-        .slice(0, 1),
-      ...data
-        .filter((article) => article.categories.includes("Technology"))
-        .slice(0, 1),
-    ];
+  // if (!data.createdAt) {
+  //   const heroArticle = [
+  //     ...data
+  //       .filter((article) => article.categories.includes("Technology"))
+  //       .slice(0, 1),
+  //     ...data
+  //       .filter((article) => article.categories.includes("Stock"))
+  //       .slice(0, 1),
+  //     ...data
+  //       .filter((article) => article.categories.includes("Health"))
+  //       .slice(0, 1),
+  //     ...data
+  //       .filter((article) => article.categories.includes("Technology"))
+  //       .slice(0, 1),
+  //   ];
 
-    return;
-  }
+  //   return;
+  // }
 
   // call sorting
 
@@ -276,6 +277,7 @@ async function mustRead(category, headerSelector) {
     .map((article) => {
       return `
   
+
    <div class="card-article-sections_content must-read-article-section-content">
 
                                 <div class="grid_card-img">

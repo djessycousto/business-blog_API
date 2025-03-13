@@ -36,6 +36,12 @@ router.get("/category/:category", async (req, res) => {
   }
 });
 
+// search page
+
+router.get("/search", (req, res) => {
+  res.status(200).render("search-page");
+});
+
 // add Auth in this route
 
 router.get("/category/article/:id", (req, res) => {

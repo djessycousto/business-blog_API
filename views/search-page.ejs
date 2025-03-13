@@ -1,0 +1,109 @@
+<%- include('./partials/header.ejs') %>
+
+    <style>
+        .searcch-wrap {
+            min-height: 300px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+
+        main {
+            border: 1px solid red;
+        }
+
+
+        .grid_card-text p {
+            white-space: normal;
+            border: 1px solid red;
+            width: 100%;
+            /* Ensures text wraps */
+            word-wrap: break-word;
+            /* Breaks long words if needed */
+            overflow-wrap: break-word;
+            /* Ensures consistent wrapping */
+            max-width: 100%;
+            /* Limits text width to stay within the container */
+        }
+
+        .grid_card-img {
+            width: 100%;
+        }
+
+        .grid_card-img img {
+            width: 100%;
+        }
+    </style>
+
+    <main>
+        <div class="article-flex">
+            <section class="left-section-article search-title">
+                <header>
+                    <h1>
+                        category
+                    </h1>
+                    <p></p>
+                </header>
+
+                <article class="short-post">
+                    <section class="stock-market section-card">
+                        <div class="short-post-title  section-card_text_header">
+                            <!-- <h1>Politics</h1> -->
+                            <h1></h1>
+                            <!-- <span>View All-></span> -->
+                        </div>
+
+                        <div class="grid_card_content-wrap search-wrap section-grid-card-content-wrap">
+
+                            <div class="grid_card_content search-card_content section-grid-card-content">
+
+                                <div class="grid_card-img .search-card_img">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="grid_card-text search-card_text section-card_text_body">
+                                    <h2>
+                                        title
+                                    </h2>
+                                    <span class="tag">
+                                        tags
+                                    </span>
+                                    <!-- <span class="createdAt"> <span>author name</span> June 28, 2021 </span> -->
+                                    <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque
+                                        nibh amet, massa egestas risus, gravida vel amet, imperdiet ...
+                                    </p>
+                                </div>
+                                <a href="/category/article"> Read more » </a>
+
+                            </div>
+
+                        </div> <!-- Closing missing div -->
+
+                    </section>
+                </article>
+            </section>
+
+            <section class="right-section-article">
+                <header>
+                    <h1>Recent Post</h1>
+                </header>
+                <div class="recent-links">
+
+                    <a class="recent-link" href="/category/article">
+                        title
+                    </a>
+                </div>
+
+                <header>
+                    <h1>Category</h1>
+                </header>
+                <div class="category-links">
+                    <a href="">Technology</a>
+                    <a href="">AI</a>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
