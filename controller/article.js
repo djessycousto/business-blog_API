@@ -52,25 +52,28 @@ const getAllArticle = async (req, res, next) => {
 const getSearchArticle = async (req, res, next) => {
   try {
     const { search, page, limit } = req.query;
-    console.log("Query params:", req.query);
 
-    console.log(search, page, limit);
     const queryObject = {};
     // Search filter (e.g., search by title or content)
-    if (search) {
+    // if (search) {
+    //   queryObject.$or = [
+    //     { title: { $regex: search, $options: "i" } }, // Case-insensitive search
+    //     { article: { $regex: search, $options: "i" } },
+    //   ];
+    // }
+
+    // Search filter
+    if (search && search.trim() !== "") {
       queryObject.$or = [
         { title: { $regex: search, $options: "i" } }, // Case-insensitive search
         { article: { $regex: search, $options: "i" } },
+        // { title: { $regex: `\\b${search}\\b`, $options: "i" } },
+        // { article: { $regex: `\\b${search}\\b`, $options: "i" } },
       ];
     }
 
-    // Search filter
-    // if (search && search.trim() !== "") {
-    //   queryObject.$or = [
-    //     { title: { $regex: `\\b${search}\\b`, $options: "i" } },
-    //     { article: { $regex: `\\b${search}\\b`, $options: "i" } },
-    //   ];
-    // }
+    // { title: { $regex: `\\b${search}\\b`, $options: "i" } }, // Exact word match in title
+    // { article: { $regex: `\\b${search}\\b`, $options: "i" } } // Exact word match in article
 
     // Category filter
     // if (categories && categories.trim() !== "") {
@@ -84,6 +87,18 @@ const getSearchArticle = async (req, res, next) => {
       .sort({ createdAt: -1 }); // Example: Sort by newest first
 
     const totalArticles = await Article.countDocuments(queryObject);
+
+    if (article.length === 0) {
+      res.status(200).json({
+        success: false,
+        // count: article.length,
+        // totalArticles,
+        // totalPages: Math.ceil(totalArticles / limit) || 1,
+        // currentPage: Number(page),
+        article: [],
+      });
+      return;
+    }
 
     res.status(200).json({
       success: true,

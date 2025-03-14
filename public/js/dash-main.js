@@ -4,13 +4,11 @@ function showPage(pageId) {
 
   // console.log(pages, "from dash main");
   pages.forEach((page) => {
-    // console.log(page, "pages to remove");
     page.classList.remove("active");
   });
 
   // Show the selected page
   const selectedPage = document.getElementById(pageId);
-  // console.log(selectedPage, "page id");
   selectedPage.classList.add("active");
 }
 

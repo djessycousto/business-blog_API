@@ -21,6 +21,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const {
+  forgotPassword,
+  resetPassword,
   getAllUser,
   getSingleUser,
   showUser,
@@ -34,6 +36,11 @@ const { authenticateUser } = require("../middleware/authenticateUser");
 router.post("/user/userProfilePic", upload.single("userImage"), userPicture);
 router.route("/user").get(authenticateUser, getAllUser);
 // router.route("/user/picture").post(authenticateUser, userPicture);
+
+// forgot pass and reset
+
+router.route("/user/forget-password").post(authenticateUser, forgotPassword);
+router.route("/user/reset-password").post(authenticateUser, resetPassword);
 
 router.route("/user/showMe").get(authenticateUser, showUser);
 

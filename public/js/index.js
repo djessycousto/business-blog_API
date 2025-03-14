@@ -63,6 +63,10 @@ navItems();
 //###############################################search
 //======================  search init and redirect
 
+document.fonts.ready.then(() => {
+  document.body.classList.add("fonts-loaded");
+});
+
 document.getElementById("search-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -84,9 +88,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Get the query parameters from the URL
   const queryParams = new URLSearchParams(window.location.search);
   const searchTerm = queryParams.get("search");
-  console.log(searchTerm);
-  console.log(queryParams);
-  console.log(window.location.search);
 
   // const categories = queryParams.get("categories");
 
@@ -109,15 +110,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 function displaySearchResults(article, searchTerm, success) {
   const loader = document.getElementById("loader");
   const searchTitle = document.querySelector(".search-title header h1");
-  console.log(searchTitle);
 
-  console.log(searchTerm, "searchTerm");
+  if (!searchTitle) {
+    return;
+  }
+
   searchTitle.textContent = `Search for "${searchTerm}"`;
+  // const resultsContainer = document.querySelector(".search-wrap");
+  const resultsContainer = document.querySelector(".search-card_content");
 
-  const resultsContainer = document.querySelector(".search-wrap");
+  // if (!article || !article.length) {
+  //   resultsContainer.innerHTML = ``;
+  //   loader.style.display = "none"; // Hide loader after data is loaded
+  //   resultsContainer.innerHTML = `<p>No articles found. Try adjusting your search criteria.</p>`;
+  //   return;
+  // }
 
-  if (success === false || !article || !article.length) {
-    resultsContainer.innerHTML = ``;
+  if (!article || article.length === 0) {
+    loader.style.display = "none";
     resultsContainer.innerHTML = `<p>No articles found. Try adjusting your search criteria.</p>`;
     return;
   }
@@ -132,7 +142,7 @@ function displaySearchResults(article, searchTerm, success) {
       <div class="grid_card-text">
         <h2>${post.title}</h2>
         <span class="tag">${post.tags}</span>
-        <p>${post.article}</p>
+        <p>${post.article} + ...</p>
         <a href="/category/article/${post._id}">Read more »</a>
       </div>
     </div>

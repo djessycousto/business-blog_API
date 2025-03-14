@@ -143,6 +143,14 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const forgotPassword = async (req, res) => {
+  res.send("forget pass");
+};
+
+const resetPassword = async (req, res) => {
+  res.send("reset pass");
+};
+
 module.exports = {
   getAllUser,
   getSingleUser,
@@ -151,5 +159,7 @@ module.exports = {
   editUser,
   deleteUser,
   deleteImage,
+  forgotPassword,
+  resetPassword,
   // updateUserPassword
 };
