@@ -164,20 +164,25 @@ const login = async (req, res, next) => {
   }
 };
 
-const logout = async (req, res) => {
-  await Token.findOneAndDelete({ user: req.user.userId });
+const logout = async (req, res, next) => {
+  try {
+    await Token.findOneAndDelete({ user: req.user.userId });
+    console.log(req.user.userId, "in logout");
 
-  res.cookie("accessToken", "logout", {
-    httpOnly: true,
-    expires: new Date(Date.now()),
-  });
+    res.cookie("accessToken", "logout", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    });
 
-  // refresh cookie res
-  res.cookie("refreshToken", refreshTokenJWT, {
-    httpOnly: true,
-    expires: new Date(Date.now()),
-  });
-  res.status(200).json({ msg: "user logged out" });
+    // refresh cookie res
+    res.cookie("refreshToken", "logout", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    });
+    res.status(200).json({ msg: "user logged out" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const forgetPassword = async (req, res) => {
