@@ -2,7 +2,12 @@ const User = require("../model/User");
 const { attachCookiesToResponse } = require("../utils");
 const { BadRequestError, UnauthenticatedError } = require("../error");
 const Token = require("../model/Token");
-const { createTokenUser, sendVerificationEmail } = require("../utils");
+const {
+  createTokenUser,
+  createHash,
+  sendVerificationEmail,
+  sendResetPasswordEmail,
+} = require("../utils");
 const crypto = require("crypto");
 // const bcrypt = require("bcryptjs"); //
 
@@ -186,11 +191,77 @@ const logout = async (req, res, next) => {
 };
 
 const forgetPassword = async (req, res) => {
-  const { email } = req.body;
+  try {
+    const { email } = req.body;
+    if (!email) {
+      throw new BadRequestError("Please email is required!");
+    }
+
+    // find user
+
+    const user = await User.findOne({ email });
+
+    if (user) {
+      const passwordToken = crypto.randomBytes(70).toString("hex");
+      // send email
+      const origin = "http://localhost:8080/api-blog/v1/pages"; // the frontend  use proxy if frontend else where and
+      await sendResetPasswordEmail({
+        name: user.name,
+        email: user.email,
+        token: passwordToken,
+        origin,
+      });
+
+      //end  send email
+
+      const tenMinute = 1000 * 60 * 10;
+      const passwordTokenExpirationDate = new Date(Date.now() + tenMinute);
+
+      //  add to user
+      user.passwordToken = createHash(passwordToken);
+      user.passwordTokenExpirationDate = passwordTokenExpirationDate;
+      await user.save();
+    }
+
+    // always send a success response
+
+    res
+      .status(200)
+      .json({ msg: "Please check your email reset password link " });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const resetPassword = async (req, res) => {
-  const { email } = req.body;
+  const { email, token, password } = req.body;
+
+  if (!email || !token || !password) {
+    throw new BadRequestError("Please provide all values");
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw new BadRequestError("Invalid email or token");
+  }
+
+  const currentDate = new Date();
+
+  if (
+    user.passwordToken === createHash(token) &&
+    user.passwordTokenExpirationDate > currentDate
+  ) {
+    user.password = password;
+    user.passwordToken = null;
+    user.passwordTokenExpirationDate = null;
+
+    await user.save();
+
+    return res.status(200).json({ msg: "Password successfully changed" });
+  }
+
+  res.status(400).json({ msg: "Invalid token or expired link" });
 };
 
 module.exports = {

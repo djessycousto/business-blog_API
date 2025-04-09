@@ -644,6 +644,15 @@ main {
   left: 0;
   bottom: 0;
   padding: 24px;
+  width: 100%;
+}
+.latest_card-text p {
+  white-space: normal;
+  width: 100%;
+  /* Ensures text wraps */
+  word-wrap: break-word;
+  /* Breaks long words if needed */
+  overflow-wrap: break-word;
 }
 
 .latest_card-text h2 {
@@ -685,19 +694,61 @@ main {
   }
 }
 
-/********************* wrap-article-sections */
+/********************* health and automobile */
 
 .wrap-article-sections {
-  /* border: 1px solid red; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   min-height: 100%;
   margin: 64px 0;
 }
 
+.doublecardSection-left-content .doublecardSection-right-content {
+  width: 100%;
+  max-width: none; /* Allows it to expand fully */
+  flex: 1; /* Flexbox-based sizing for balance */
+  border: 4px solid greenyellow;
+  /* box-sizing: border-box; */
+}
+
+.doublecardSection-left-content .grid_card-img,
+.doublecardSection-right-content .grid_card-img {
+  width: 100%;
+}
+
+.doublecardSection-left-content .grid_card-img img,
+.doublecardSection-right-content .grid_card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doublecardSection-left-content .grid_card-text,
+.doublecardSection-right-content .grid_card-text {
+  width: 100%;
+}
+
+.doublecardSection-left-content .grid_card-text p,
+.doublecardSection-right-content .grid_card-text p {
+  width: 100%; /* Full width within its container */
+  max-width: 95%; /* Scales naturally without a fixed limit */
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word; /* For long words or links */
+}
+
 .card-article-sections_content {
   margin: 24px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrap-article-sections {
+    flex-direction: row;
+  }
 }
 
 /********************* sign up */

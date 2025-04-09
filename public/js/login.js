@@ -59,5 +59,3 @@ function login() {
 }
 
 login();
-
-console.log("hello ");

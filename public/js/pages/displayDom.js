@@ -28,6 +28,11 @@ const editorPickCartDOM = (data) => {
 const cartDOM = (data, sectionDom) => {
   const cards = data
     .map((article) => {
+      // date
+      const date = new Date(article.createdAt);
+      const month = date.getMonth();
+      const day = date.getDay();
+      const year = date.getFullYear();
       return `
 
 
@@ -36,13 +41,15 @@ const cartDOM = (data, sectionDom) => {
         <div class="grid_card-img">
             <img src="${article.articlePicture}" alt="">
         </div>
-       <a href="${baseUrl}/category/article/${article._id}"> <div class="grid_card-text">
+       <a href="${baseUrl}/category/article/${
+        article._id
+      }"> <div class="grid_card-text">
             <span class="tag">${article.tags}</span>
             <h2>${article.title}</h2>
-            <span class="createdAt"> <span>author name</span> June 28, 2021 </span>
-            <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque nibh amet,
-                massa
-                egestas risus, gravida vel amet, imperdiet ...</p>
+            <span class="createdAt"> <span>${
+              article.createBy
+            }</span> 0${day}/0${month}/${year} </span>
+            <p>${article.article.substring(0, 150)}[...]</p>
         </div></a>
     </div>
 
@@ -62,6 +69,15 @@ const cartDOM = (data, sectionDom) => {
 const cartDOMTwoSection = (data, sectionDom) => {
   const cards = data
     .map((article) => {
+      const date = new Date(article.createdAt);
+      const month = date.getMonth();
+      const day = date.getDay();
+      const year = date.getFullYear();
+
+      const trimArticle =
+        article.article > 150
+          ? `${article.article.substring(0, 80)}[...]`
+          : article.article;
       return `
   
   
@@ -71,13 +87,15 @@ const cartDOMTwoSection = (data, sectionDom) => {
                  <img src="${article.articlePicture}" alt="">
              </div>
                
-             <a href="${baseUrl}/category/article/${article._id}"><div class="latest_card-text">
+             <a href="${baseUrl}/category/article/${
+        article._id
+      }"><div class="latest_card-text">
                     <span class="tag">Stock Market</span>
                     <h2>What Your Relationship With Stock Market Says About You</h2>
-                    <span class="createdAt"> <span>author name</span> June 28, 2021 </span>
-                    <p>Cursus iaculis etiam in In nullam donec sem sed consequat scelerisque nibh amet,
-                                    massa
-                                    egestas risus, gravida vel amet, imperdiet ...</p>
+                    <span class="createdAt"> <span>${
+                      article.createBy
+                    }</span>0${day}/0${month}/${year} </span>
+                    <p>${article.article.substring(0, 150)}[...]</p>
             
      </div>
      </div>

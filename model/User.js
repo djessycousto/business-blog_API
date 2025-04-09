@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-    passwordTokenExpiration: {
+    passwordTokenExpirationDate: {
       type: Date,
       default: null,
     },

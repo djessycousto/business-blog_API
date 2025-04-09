@@ -1,3 +1,12 @@
+// the dynamic link
+
+//  chart and font awsome to fix
+
+const baseURL =
+  window.location.hostname === "localhost"
+    ? `${window.location.origin}/api-blog/v1`
+    : window.location.origin;
+
 function showPage(pageId) {
   // Hide all pages
   const pages = document.querySelectorAll(".page");
@@ -98,7 +107,7 @@ function logoutV1() {
     e.preventDefault();
     console.log("logout cliked");
     const fetchlogout = async () => {
-      const response = await fetch("/auth/logout");
+      const response = await fetch(`${window.location.origin}/auth/logout`);
       console.log(response);
       //   // check if sucess
       if (!response.ok) {

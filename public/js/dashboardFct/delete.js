@@ -1,4 +1,9 @@
 //###################### delete
+
+const baseURL =
+  window.location.hostname === "localhost"
+    ? `${window.location.origin}/api-blog/v1`
+    : window.location.origin;
 //////////////================ Handle delete
 const deletePost = async (postId) => {
   try {

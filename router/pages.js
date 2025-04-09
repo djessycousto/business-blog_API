@@ -65,8 +65,15 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.get("/user/verify-email", (req, res) => {
+router.get("/verify-email", (req, res) => {
+  // was /user/verify-email
   res.render("emailpage");
+});
+router.get("/forget-password", (req, res) => {
+  res.render("forgetPassword");
+});
+router.get("/reset-password", (req, res) => {
+  res.render("resetPassword");
 });
 
 module.exports = router;

@@ -26,37 +26,10 @@ function sorting(data) {
 async function hero() {
   const data = await fetchAllArticle();
 
-  // if (!data.createdAt) {
-  //   const heroArticle = [
-  //     ...data
-  //       .filter((article) => article.categories.includes("Technology"))
-  //       .slice(0, 1),
-  //     ...data
-  //       .filter((article) => article.categories.includes("Stock"))
-  //       .slice(0, 1),
-  //     ...data
-  //       .filter((article) => article.categories.includes("Health"))
-  //       .slice(0, 1),
-  //     ...data
-  //       .filter((article) => article.categories.includes("Technology"))
-  //       .slice(0, 1),
-  //   ];
-
-  //   return;
-  // }
-
-  // call sorting
-
   sorting(data);
 
   //   4 articles 1 main and 3 sub
   const heroArticle = [
-    // data.filter(
-    //   (article) => console.log(article.categories === "Technology") // need to add featured:true for hero
-    // ),
-    // data.filter((article) => {
-    //   return article.categories.includes("Technology");
-    // }), // need to add featured:true for hero
     ...data
       .filter((article) => article.categories.includes("Technology"))
       .slice(0, 1),
@@ -77,6 +50,12 @@ async function hero() {
 
   const articleLeftHot = heroArticle[0];
   // Base
+  const date = new Date(articleLeftHot.createdAt);
+
+  // Extract year, month (0-indexed, so add 1), and day
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
   //   left hot topic
   const heroArticleLeft = `
@@ -86,7 +65,7 @@ async function hero() {
                             <span class="tag">${articleLeftHot.tags}</span>
                             <a href="${baseUrl}/category/article/${articleLeftHot._id}">
                            <p>${articleLeftHot.title}</p></a>
-                            <span class="createdAt">June 28, 2021 </span>
+                            <span class="createdAt">0${day}/0${month}/${year} </span>
                         </div>
                     </div>`;
 
@@ -112,7 +91,7 @@ async function hero() {
 
                                     <a href="${baseUrl}/category/article/${_id}">
                            <p>${title}</p></a>
-                                    <span class="createdAt">June 28, 2021 </span>
+                                    <span class="createdAt">0${day}/0${month}/${year} </span>
                                 </div>
             </div>
                     </div>
@@ -233,7 +212,7 @@ async function twoArticle(category, classItem, headerSelector) {
   });
 
   const cardsTemplate = cards.slice(0, 1);
-  const { articlePicture, tags, categories } = cardsTemplate[0];
+  const { articlePicture, tags, categories, article } = cardsTemplate[0];
 
   headerTitleAndLink(category, headerSelector);
 
@@ -241,6 +220,9 @@ async function twoArticle(category, classItem, headerSelector) {
   const CardsImg = document.querySelector(`${classItem} .grid_card-img img`);
   const CardsTag = document.querySelector(`${classItem} .grid_card-text .tag`);
   const CardsH2 = document.querySelector(`${classItem} .grid_card-text h2`);
+  const CardsTextContent = document.querySelector(
+    `${classItem} .grid_card-text p`
+  );
   const CardsParagraph = document.querySelector(
     `${classItem} grid_card-text p`
   );
@@ -248,6 +230,7 @@ async function twoArticle(category, classItem, headerSelector) {
   CardsImg.src = articlePicture;
   CardsTag.textContent = tags;
   CardsH2.textContent = `${categories}`;
+  CardsTextContent.textContent = `${article.substring(0, 150)}[...]`;
 
   //
 }

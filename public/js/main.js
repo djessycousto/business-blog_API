@@ -1,4 +1,4 @@
-// navebar
+// navbar
 
 const menu = document.querySelector(".menu");
 const closeMenu = document.querySelector(".close-menu");

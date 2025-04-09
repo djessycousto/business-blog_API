@@ -1,4 +1,5 @@
 const Article = require("../model/Article");
+const User = require("../model/User");
 // const path = require("path");
 const { BadRequestError } = require("../error");
 const cloudinary = require("cloudinary").v2;
@@ -40,9 +41,10 @@ const createArticle = async (req, res, next) => {
 // to be edit to include sorting
 const getAllArticle = async (req, res, next) => {
   try {
-    // console.log(localData);
+    // get user Role
 
     const article = await Article.find().sort({ createdAt: -1 });
+
     res.status(200).json({ article });
   } catch (error) {
     next(error);
